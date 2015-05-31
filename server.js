@@ -24,29 +24,28 @@ var router = express.Router();
 
 router.use(function(req,res,next){
 	console.log("API Call");
+	//some debug shit can go here
 	next();
 });
 
-router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
-});
-
-
 router.route('/students/:student_id')
 	.get(function(req,res){
-		console.log("in");
+
 		MongoClient.connect(mongoConnectionString, function(err, db) {
-		  if(err) { return console.dir(err); }
+		  if(err) { 
+		  	return console.dir(err); 
+		  }
+		  console.log("------------")
+		  console.log("Fetching for uw_id"+req.params.student_id);
+		  console.log("Visiting from IP:"+req.connection.remoteAddress);
+		  console.log("------------")
 
-		  console.log("fetching for "+req.params.student_id);
-		  console.log("visiting from "+req.connection.remoteAddress);
-
-		  db.collection('students').find({'uw_id':parseInt(req.params.student_id)}).toArray(function(err,doc){
+		  db.collection('students')
+		  //mongodb query
+		  .find({'uw_id':parseInt(req.params.student_id)}).toArray(function(err,doc){
 		    	if(err)throw err;
 		    	res.json(doc);
-		    });
-		    
-		      
+		    });  
 		});
 	});
 
@@ -56,9 +55,7 @@ app.use('/api', router);
 // START THE SERVER
 // =============================================================================
 app.listen(port);
-console.log('Magic happens on port ' + port);
+console.log('Shit happens on ' + port);
 
-
-///some mongo import commands
-
+//some mongo import commands
 //mongoimport -h ds041432.mongolab.com:41432 -d cs446 -c students -u michael -p admin --file <input file> --jsonArray
