@@ -36,14 +36,28 @@ router.route('/students/:student_id')
 		  	return console.dir(err); 
 		  }
 		  console.log("------------")
-		  console.log("Fetching for uw_id"+req.params.student_id);
+		  console.log("Fetching for uw_id:"+req.params.student_id);
 		  console.log("Visiting from IP:"+req.connection.remoteAddress);
 		  console.log("------------")
 
 		  db.collection('students')
 		  //mongodb query
-		  .find({'uw_id':parseInt(req.params.student_id)}).toArray(function(err,doc){
+		  .find(
+		  	{'uw_id':parseInt(req.params.student_id)},
+		  	{
+		  		_id:0,
+		  		uw_id:1,
+		  		term_id:1,
+		  		subject_code:1,
+		  		catalog:1,
+		  		attempt_class:1,
+		  		'details.units_earned':1,
+		  		'details.course_title':1,
+		  		'details.earn_credit':1,
+		  		'group_code':1
+		  	}).toArray(function(err,doc){
 		    	if(err)throw err;
+
 		    	res.json(doc);
 		    });  
 		});
