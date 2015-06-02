@@ -35,10 +35,10 @@ router.route('/students/:student_id')
 		  if(err) { 
 		  	return console.dir(err); 
 		  }
-		  console.log("------------")
+		  console.log("------------------")
 		  console.log("Fetching for uw_id:"+req.params.student_id);
 		  console.log("Visiting from IP:"+req.connection.remoteAddress);
-		  console.log("------------")
+		  console.log("------------------")
 
 		  db.collection('students')
 		  //mongodb query
