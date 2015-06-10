@@ -1,415 +1,471 @@
 {
-    "plan":"CSBHC",
-    "Required Courses":{
-        "7.5 CS Units":{
-            "Required":15,
-            "CS 115, 135, 3XX or 4XX":{
-                "Constraints":[
-                    "CS115",
-                    "CS135",
-                    "CS3XX",
-                    "CS4XX"
-                ],
-                "Selected":null
-            },
-            "CS 136 or 145":{
-                "Constraints":[
-                    "CS136",
-                    "CS145"
-                ],
-                "Selected":null
-            },
-            "CS240":{
-                "Constraints":[
-                    "CS240"
-                ],
-                "Selected":null
-            },
-            "CS 241":{
-                "Constraints":[
-                    "CS241"
-                ],
-                "Selected":null
-            },
-            "CS 245":{
-                "Constraints":[
-                    "CS245"
-                ],
-                "Selected":null
-            },
-            "CS 246":{
-                "Constraints":[
-                    "CS246"
-                ],
-                "Selected":null
-            },
-            "CS 251":{
-                "Constraints":[
-                    "CS251"
-                ],
-                "Selected":null
-            },
-            "CS 341":{
-                "Constraints":[
-                    "CS341"
-                ],
-                "Selected":null
-            },
-            "CS 350":{
-                "Constraints":[
-                    "CS350"
-                ],
-                "Selected":null
-            },
-            "CS 340-398, 440-489":{
-                "Constraints":[
-                    "CS340-398",
-                    "CS440-489"
-                ],
-                "Selected":null
-            },
-            "CS 340-398, 440-489":{
-                "Constraints":[
-                    "CS340-398",
-                    "CS440-489"
-                ],
-                "Selected":null
-            },
-            "CS 340-398, 440-489":{
-                "Constraints":[
-                    "CS340-398",
-                    "CS440-489"
-                ],
-                "Selected":null
-            },
-            "CS 440-489":{
-                "Constraints":[
-                    "CS440-489"
-                ],
-                "Selected":null
-            },
-            "CS 440-489":{
-                "Constraints":[
-                    "CS440-489"
-                ],
-                "Selected":null
-            },
-            "CS 440-498 or CS 499T or CS 6XX or CS 7XX or STAT 440 or CO 487":{
-                "Constraints":[
-                    "CS440-489",
-                    "CS449T",
-                    "CS6XX",
-                    "CS7XX",
-                    "STAT440",
-                    "CO487"
-                ],
-                "Selected":null
-            }
+  "plan": "CSBHC",
+  "Required Courses": {
+    "7.5 CS Units": {
+      "Required": 15,
+      "Requirements": [
+        {
+          "CS 115, 135, 3XX or 4XX": {
+            "Constraints": [
+              "CS115",
+              "CS135",
+              "CS3XX",
+              "CS4XX"
+            ],
+            "Selected": null
+          }
         },
-        "3.5 Math Units":{
-            "Required":7,
-            "MATH 1[34]5":{
-                "Constraints":[
-                    "MATH135",
-                    "MATH145"
-                ],
-                "Selected":null
-            },
-            "MATH 1[34]6":{
-                "Constraints":[
-                    "MATH136",
-                    "MATH146"
-                ],
-                "Selected":null
-            },
-            "MATH 1[234]7":{
-                "Constraints":[
-                    "MATH127",
-                    "MATH137",
-                    "MATH147"
-                ],
-                "Selected":null
-            },
-            "MATH 1[234]8":{
-                "Constraints":[
-                    "MATH128",
-                    "MATH138",
-                    "MATH148"
-                ],
-                "Selected":null
-            },
-            "MATH 2[34]9":{
-                "Constraints":[
-                    "MATH239",
-                    "MATH249"
-                ],
-                "Selected":null
-            },
-            "STAT 2[34]0":{
-                "Constraints":[
-                    "STAT230",
-                    "STAT240"
-                ],
-                "Selected":null
-            },
-            "STAT 2[34]1":{
-                "Constraints":[
-                    "STAT231",
-                    "STAT241"
-                ],
-                "Selected":null
-            }
+        {
+          "CS 136 or 145": {
+            "Constraints": [
+              "CS136",
+              "CS145"
+            ],
+            "Selected": null
+          }
         },
-        "4.0 Elective Units":{
-            "Required":8,
-            "1":{
-                "Constraints":[
-                    "ELECTIVE"
-                ],
-                "Selected":null
-            },
-            "2":{
-                "Constraints":[
-                    "ELECTIVE"
-                ],
-                "Selected":null
-            },
-            "3":{
-                "Constraints":[
-                    "ELECTIVE"
-                ],
-                "Selected":null
-            },
-            "4":{
-                "Constraints":[
-                    "ELECTIVE"
-                ],
-                "Selected":null
-            },
-            "5":{
-                "Constraints":[
-                    "ELECTIVE"
-                ],
-                "Selected":null
-            },
-            "6":{
-                "Constraints":[
-                    "ELECTIVE"
-                ],
-                "Selected":null
-            },
-            "7":{
-                "Constraints":[
-                    "ELECTIVE"
-                ],
-                "Selected":null
-            },
-            "8":{
-                "Constraints":[
-                    "ELECTIVE"
-                ],
-                "Selected":null
-            }
+        {
+          "CS240": {
+            "Constraints": [
+              "CS240"
+            ],
+            "Selected": null
+          }
         },
-        "5.0 Non-math Units":{
-            "Required":10,
-            "1":{
-                "Constraints":[
-                    "NONMATH"
-                ],
-                "Selected":null
-            },
-            "2":{
-                "Constraints":[
-                    "NONMATH"
-                ],
-                "Selected":null
-            },
-            "3":{
-                "Constraints":[
-                    "NONMATH"
-                ],
-                "Selected":null
-            },
-            "4":{
-                "Constraints":[
-                    "NONMATH"
-                ],
-                "Selected":null
-            },
-            "5":{
-                "Constraints":[
-                    "NONMATH"
-                ],
-                "Selected":null
-            },
-            "6":{
-                "Constraints":[
-                    "NONMATH"
-                ],
-                "Selected":null
-            },
-            "7":{
-                "Constraints":[
-                    "NONMATH"
-                ],
-                "Selected":null
-            },
-            "8":{
-                "Constraints":[
-                    "NONMATH"
-                ],
-                "Selected":null
-            },
-            "9":{
-                "Constraints":[
-                    "NONMATH"
-                ],
-                "Selected":null
-            },
-            "10":{
-                "Constraints":[
-                    "NONMATH"
-                ],
-                "Selected":null
-            }
+        {
+          "CS 241": {
+            "Constraints": [
+              "CS241"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "CS 245": {
+            "Constraints": [
+              "CS245"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "CS 246": {
+            "Constraints": [
+              "CS246"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "CS 251": {
+            "Constraints": [
+              "CS251"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "CS 341": {
+            "Constraints": [
+              "CS341"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "CS 350": {
+            "Constraints": [
+              "CS350"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "CS 340-398, 440-489": {
+            "Constraints": [
+              "CS340-398",
+              "CS440-489"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "CS 440-489": {
+            "Constraints": [
+              "CS440-489"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "CS 440-498 or CS 499T or CS 6XX or CS 7XX or STAT 440 or CO 487": {
+            "Constraints": [
+              "CS440-489",
+              "CS449T",
+              "CS6XX",
+              "CS7XX",
+              "STAT440",
+              "CO487"
+            ],
+            "Selected": null
+          }
         }
+      ]
     },
-    "Additional Constraints":{
-        "Two of (CS Breadth)":{
-            "Required":2,
-            "One of CS 343, 442, 444, 445, 446, 447,450, 452,454, 456, 457":{
-                "Constraints":[
-                    "CS343",
-                    "CS442",
-                    "CS444",
-                    "CS445",
-                    "CS446",
-                    "CS447",
-                    "CS450",
-                    "CS452",
-                    "CS456",
-                    "CS457"
-                ],
-                "Selected":null
-            },
-            "One of CS 348, 448, 482, 483, 486, 488":{
-                "Constraints":[
-                    "CS348",
-                    "CS448",
-                    "CS482",
-                    "CS483",
-                    "CS486",
-                    "CS488"
-                ],
-                "Selected":null
-            },
-            "One of CS 360, 365, 370, 371, 462, 466, 475, 476, 487":{
-                "Constraints":[
-                    "CS360",
-                    "CS365",
-                    "CS370",
-                    "CS371",
-                    "CS462",
-                    "CS466",
-                    "CS475",
-                    "CS476",
-                    "CS487"
-                ],
-                "Selected":null
-            }
+    "3.5 Math Units": {
+      "Required": 7,
+      "Requirements": [
+        {
+          "MATH 1[34]5": {
+            "Constraints": [
+              "MATH135",
+              "MATH145"
+            ],
+            "Selected": null
+          }
         },
-        "Non-math units that satisfy one of: ":{
-            "Required":1,
-            "A minor, joint or full Honours plan from outside of the Mathematics Faculty":{
-                "Constraints":[
-                    "MINOR"
-                ],
-                "Selected":null
-            },
-            "Elective breadth and depth requirements":{
-                "All of (breadth): ":{
-                    "1.0 units from the humanities": {
-                        "1": {
-                            "Constraints": [
-                                "HUMANITIES"
-                            ],
-                            "Selected": null    
-                        },
-                        "2": {
-                             "Constraints": [
-                                "HUMANITIES"
-                            ],
-                            "Selected": null  
-                        }
-                        
-                    },
-                    "1.0 units from the social sciences":{
-                        "1": {
-                             "Constraints": [
-                                "SOCIALSCIENCE"
-                            ],
-                            "Selected": null  
-                        },
-                        "2": {
-                             "Constraints": [
-                                "SOCIALSCIENCE"
-                            ],
-                            "Selected": null  
-                        }
-                    },
-                    "0.5 units from the pure sciences":{
-                        "1": {
-                            "Constraints": [
-                                "PURESCIENCE"
-                            ],
-                            "Selected": null    
-                        }
-                    },
-                    "0.5 units from the pure and applied sciences":{
-                        "1": {
-                            "Constraints": [
-                                "APPLIEDSCIENCE"
-                            ],
-                            "Selected": null
-                        }
-
-                    }
-                },
-                "One of (depth): ":{
-                    "Required":1,
-                    "1.5 units at the 3rd year level or higher with the same subject": {
-
-                    },
-                    "1.5 units with the same subject forming a prerequisite chain of length three": {
-
-                    }
-                }
-            },
-            "An alternate plan approved by a CS Advisor":{
-
-            }
+        {
+          "MATH 1[34]6": {
+            "Constraints": [
+              "MATH136",
+              "MATH146"
+            ],
+            "Selected": null
+          }
         },
-        "Seven (regular) or eight (co-op) terms enrolled in at least three courses totalling 1.5 units": {
-            
+        {
+          "MATH 1[234]7": {
+            "Constraints": [
+              "MATH127",
+              "MATH137",
+              "MATH147"
+            ],
+            "Selected": null
+          }
         },
-        "No more than 3.0 units of excluded courses": {
-
+        {
+          "MATH 1[234]8": {
+            "Constraints": [
+              "MATH128",
+              "MATH138",
+              "MATH148"
+            ],
+            "Selected": null
+          }
         },
-        "No more than 3.0 units of excluded courses": {
-
+        {
+          "MATH 2[34]9": {
+            "Constraints": [
+              "MATH239",
+              "MATH249"
+            ],
+            "Selected": null
+          }
         },
-        "CS Major Average of 60% or higher": {
-
+        {
+          "STAT 2[34]0": {
+            "Constraints": [
+              "STAT230",
+              "STAT240"
+            ],
+            "Selected": null
+          }
         },
-        "Cumulative Average of 60% or higher": {
-
-        },
-        "English Writing Skills": {
-
-        },
-        "Coop requirements met, if applicatable, including a minium of five PD courses": {
-
+        {
+          "STAT 2[34]1": {
+            "Constraints": [
+              "STAT231",
+              "STAT241"
+            ],
+            "Selected": null
+          }
         }
+      ]
+    },
+    "4.0 Elective Units": {
+      "Required": 8,
+      "Requirements": [
+        {
+          "1": {
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "2": {
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "3": {
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "4": {
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "5": {
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "6": {
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "7": {
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "8": {
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          }
+        }
+      ]
+    },
+    "5.0 Non-math Units": {
+      "Required": 10,
+      "Requirements": [
+        {
+          "1": {
+            "Constraints": [
+              "NONMATH"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "2": {
+            "Constraints": [
+              "NONMATH"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "3": {
+            "Constraints": [
+              "NONMATH"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "4": {
+            "Constraints": [
+              "NONMATH"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "5": {
+            "Constraints": [
+              "NONMATH"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "6": {
+            "Constraints": [
+              "NONMATH"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "7": {
+            "Constraints": [
+              "NONMATH"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "8": {
+            "Constraints": [
+              "NONMATH"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "9": {
+            "Constraints": [
+              "NONMATH"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "10": {
+            "Constraints": [
+              "NONMATH"
+            ],
+            "Selected": null
+          }
+        }
+      ]
     }
+  },
+  "Additional Constraints": {
+    "Two of (CS Breadth)": {
+      "Required": 2,
+      "Requirements": [
+        {
+          "One of CS 343, 442, 444, 445, 446, 447,450, 452,454, 456, 457": {
+            "Constraints": [
+              "CS343",
+              "CS442",
+              "CS444",
+              "CS445",
+              "CS446",
+              "CS447",
+              "CS450",
+              "CS452",
+              "CS456",
+              "CS457"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "One of CS 348, 448, 482, 483, 486, 488": {
+            "Constraints": [
+              "CS348",
+              "CS448",
+              "CS482",
+              "CS483",
+              "CS486",
+              "CS488"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "One of CS 360, 365, 370, 371, 462, 466, 475, 476, 487": {
+            "Constraints": [
+              "CS360",
+              "CS365",
+              "CS370",
+              "CS371",
+              "CS462",
+              "CS466",
+              "CS475",
+              "CS476",
+              "CS487"
+            ],
+            "Selected": null
+          }
+        }
+      ]
+    },
+    "Non-math units that satisfy one of: ": {
+      "Required": 1,
+      "Requirements": [
+        {
+          "A minor, joint or full Honours plan from outside of the Mathematics Faculty": {
+            "Constraints": [
+              "MINOR"
+            ],
+            "Selected": null
+          }
+        },
+        {
+          "Elective breadth and depth requirements": {
+            "All of (breadth): ": {
+              "1.0 units from the humanities": {
+                "1": {
+                  "Constraints": [
+                    "HUMANITIES"
+                  ],
+                  "Selected": null
+                },
+                "2": {
+                  "Constraints": [
+                    "HUMANITIES"
+                  ],
+                  "Selected": null
+                }
+              },
+              "1.0 units from the social sciences": {
+                "1": {
+                  "Constraints": [
+                    "SOCIALSCIENCE"
+                  ],
+                  "Selected": null
+                },
+                "2": {
+                  "Constraints": [
+                    "SOCIALSCIENCE"
+                  ],
+                  "Selected": null
+                }
+              },
+              "0.5 units from the pure sciences": {
+                "1": {
+                  "Constraints": [
+                    "PURESCIENCE"
+                  ],
+                  "Selected": null
+                }
+              },
+              "0.5 units from the pure and applied sciences": {
+                "1": {
+                  "Constraints": [
+                    "APPLIEDSCIENCE"
+                  ],
+                  "Selected": null
+                }
+              }
+            },
+            "One of (depth): ": {
+              "Required": 1,
+              "1.5 units at the 3rd year level or higher with the same subject": {},
+              "1.5 units with the same subject forming a prerequisite chain of length three": {}
+            }
+          }
+        },
+        {
+          "An alternate plan approved by a CS Advisor": {
+          }
+        }
+      ]
+    },
+    "Seven (regular) or eight (co-op) terms enrolled in at least three courses totalling 1.5 units": {},
+    "No more than 3.0 units of excluded courses": {},
+    "CS Major Average of 60% or higher": {},
+    "Cumulative Average of 60% or higher": {},
+    "English Writing Skills": {},
+    "Coop requirements met, if applicatable, including a minium of five PD courses": {}
+  }
 }
