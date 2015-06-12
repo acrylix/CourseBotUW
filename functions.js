@@ -2,7 +2,12 @@ var MongoClient = require('mongodb').MongoClient;
 var config = require('./config');
 
 module.exports = {
-	fillChecklist: function (student_id){
+	fillChecklist: fillChecklist,
+	getCourseList: getCourseList,
+	getCourseFormat: getCourseFormat
+}
+
+function fillChecklist (student_id){
 		MongoClient.connect(config.mongo.connect, function(err, db) {
 			if (err) {
 				return console.dir(err);
@@ -27,8 +32,8 @@ module.exports = {
 
 
 		})
-	},
-	getCourseList: function (student_id) {
+	}
+	function getCourseList (student_id) {
 		var courseList = [];
 		MongoClient.connect(config.mongo.connect, function(err, db) {
 			if (err) {
@@ -55,8 +60,8 @@ module.exports = {
 			    	return courseList;
 			    });  
 		});
-	},
-	getCourseFormat: function (constraint){
+	}
+	function getCourseFormat (constraint){
 		MongoClient.connect(config.mongo.connect, function(err, db) {
 			  if(err) { 
 			  	return console.dir(err); 
@@ -82,4 +87,3 @@ module.exports = {
 			});
 
 	}
-}
