@@ -2,26 +2,34 @@ var MongoClient = require('mongodb').MongoClient;
 var config = require('./config');
 
 module.exports = {
-	fillChecklist: function (){
+	fillChecklist: function (student_id){
 		MongoClient.connect(config.mongo.connect, function(err, db) {
 			if (err) {
 				return console.dir(err);
 			}
 
+			var template;
+
 			db.collection('plans')
 			.find({
 				plan:'CSBHC'
 			})
-			.toArray(function(err,doc){
-			    	if(err)throw err;
-			    	
-		    		var test = doc;
-			    	return doc;
-			    });  
+			.toArray(function(err,doc) {
+		    	if(err) {
+		    		throw err;
+		    	}
+		    	
+	    		template = doc;
+				// console.log(template);
+
+		    	return doc;
+		    }); 
+
+
 		})
 	},
-	getCourseList: function () {
-		var courseMap = {};
+	getCourseList: function (student_id) {
+		var courseList = [];
 		MongoClient.connect(config.mongo.connect, function(err, db) {
 			if (err) {
 				return console.dir(err);
@@ -29,19 +37,22 @@ module.exports = {
 
 			db.collection('students')
 			.find({
-				uw_id:1009,
+				uw_id: parseInt(student_id),
 				'details.units_attempted':{$ne: 0}
 			},{
-				subject_code:1, 
-				catalog:1, 
-				_id:0})
+				subject_code:1,
+				catalog:1,
+				_id:0
+			})
 			.toArray(function(err,doc){
 			    	if(err)throw err;
 			    	
 		    		doc.forEach(function(course) {
-						courseMap[course.subject_code+course.catalog] = 1;
+						courseList.push(course.subject_code + " " + course.catalog);
 					});
-			    	return doc;
+
+		    		console.log(courseList);
+			    	return courseList;
 			    });  
 		});
 	},

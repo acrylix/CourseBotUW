@@ -64,12 +64,13 @@ router.route('/students/:student_id')
 router.route('/findcourse/:course')
 	.get(function(req,res){
 		console.log(tools.getCourseFormat(""+req.params.course));
-		tools.getCourseList();
+		//tools.getCourseList();
 	});
 
-router.route('/test')
+router.route('/test/:student_id')
 	.get(function(req,res){
-		tools.fillChecklist();
+		console.log(tools.getCourseList(req.params.student_id+""));
+		//var studentPlan;
 	});
 
 app.use('/api', router);
