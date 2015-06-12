@@ -8,6 +8,7 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
+var tools = require('./functions.js');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -66,65 +67,18 @@ router.route('/students/:student_id')
 
 router.route('/findcourse/:course')
 	.get(function(req,res){
-		console.log(getCourseFormat(""+req.params.course));
-		res.json(getCourseFormat(""+req.params.course));
-		getCourseList();
+		console.log(tools.getCourseFormat(""+req.params.course));
+		tools.getCourseList();
 	});
 
+router.route('/test')
+	.get(function(req,res){
+		tools.fillChecklist();
+	});
 
 app.use('/api', router);
 
-function getCourseList() {
-	var courseMap = {};
-	MongoClient.connect(mongoConnectionString, function(err, db) {
-		if (err) {
-			return console.dir(err);
-		}
 
-		db.collection('students')
-		.find({
-			uw_id:1009,
-			'details.units_attempted':{$ne: 0}
-		},{
-			subject_code:1, 
-			catalog:1, 
-			_id:0})
-		.toArray(function(err,doc){
-		    	if(err)throw err;
-		    	
-	    		doc.forEach(function(course) {
-					courseMap[course.subject_code+course.catalog] = 1;
-				});
-		    	return doc;
-		    });  
-	})
-}
-
-function getCourseFormat(constraint){
-	MongoClient.connect(mongoConnectionString, function(err, db) {
-		  if(err) { 
-		  	return console.dir(err); 
-		  }
-		  var subject_code = constraint.slice(0,constraint.indexOf(constraint.match(/\d/)));
-		  var catalog = constraint.slice(constraint.indexOf(constraint.match(/\d/)),constraint.length)
-		  
-		  if(catalog.indexOf('X') != -1){
-		  	var catalog = new RegExp('^' + catalog.slice(0,catalog.indexOf('X')) + '.*');
-		  }
-		  db.collection('students')
-		  .find(
-		  	{
-		  		uw_id:1009,
-		  		subject_code: subject_code,
-		  		catalog: catalog,
-		  		'details.units_attempted':{$ne: 0}
-		  	}).toArray(function(err,doc){
-		    	if(err)throw err;
-		    	console.log(doc);
-		    	return doc;
-		    });  
-		});
-}
 
 
 // START THE SERVER
