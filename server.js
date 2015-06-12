@@ -69,7 +69,7 @@ router.route('/findcourse/:course')
 
 router.route('/test/:student_id')
 	.get(function(req,res){
-		console.log(tools.getCourseList(req.params.student_id+""));
+		console.log("outside: " + tools.getCourseList(req.params.student_id));
 		//var studentPlan;
 	});
 
