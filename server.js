@@ -73,6 +73,30 @@ router.route('/test/:student_id')
 		//var studentPlan;
 	});
 
+router.route('/template/')
+	.get(function(req,res) {
+		console.log("getting template");
+
+		MongoClient.connect(config.mongo.connect, function(err, db) {
+		if (err) {
+			return console.dir(err);
+		}
+
+		db.collection('template')
+		.find({
+			"plan": 'CSBHC'
+		})
+		.toArray(function(err,doc) {
+			if (err) {
+				throw err;
+			}
+
+			res.json(doc);
+		});
+	});
+		console.log("template returned");
+	});
+
 app.use('/api', router);
 
 // START THE SERVER
