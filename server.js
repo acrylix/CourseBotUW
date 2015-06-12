@@ -9,16 +9,12 @@ var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var tools = require('./functions.js');
+var config = require('./config');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-var port = process.env.PORT || 8081;        // set our port
-
-var mongoConnectionString='mongodb://app:app@ds041432.mongolab.com:41432/cs446';
-
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -33,7 +29,7 @@ router.use(function(req,res,next){
 router.route('/students/:student_id')
 	.get(function(req,res){
 
-		MongoClient.connect(mongoConnectionString, function(err, db) {
+		MongoClient.connect(config.mongo.connect, function(err, db) {
 		  if(err) { 
 		  	return console.dir(err); 
 		  }
@@ -78,13 +74,10 @@ router.route('/test')
 
 app.use('/api', router);
 
-
-
-
 // START THE SERVER
 // =============================================================================
-app.listen(port);
-console.log('happens on ' + port);
+app.listen(config.web.port);
+console.log('happens on ' + config.web.port);
 
 //db.students.findOne({uw_id:1009,subject_code:'CS',catalog: /^3.*/,'details.units_attempted':{$ne: 0}})
 

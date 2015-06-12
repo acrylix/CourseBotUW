@@ -1,9 +1,9 @@
 var MongoClient = require('mongodb').MongoClient;
-var mongoConnectionString='mongodb://app:app@ds041432.mongolab.com:41432/cs446';
+var config = require('./config');
 
 module.exports = {
 	fillChecklist: function (){
-		MongoClient.connect(mongoConnectionString, function(err, db) {
+		MongoClient.connect(config.mongo.connect, function(err, db) {
 			if (err) {
 				return console.dir(err);
 			}
@@ -22,7 +22,7 @@ module.exports = {
 	},
 	getCourseList: function () {
 		var courseMap = {};
-		MongoClient.connect(mongoConnectionString, function(err, db) {
+		MongoClient.connect(config.mongo.connect, function(err, db) {
 			if (err) {
 				return console.dir(err);
 			}
@@ -46,7 +46,7 @@ module.exports = {
 		});
 	},
 	getCourseFormat: function (constraint){
-		MongoClient.connect(mongoConnectionString, function(err, db) {
+		MongoClient.connect(config.mongo.connect, function(err, db) {
 			  if(err) { 
 			  	return console.dir(err); 
 			  }
