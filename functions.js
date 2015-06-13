@@ -9,8 +9,12 @@ module.exports = {
 
 function fillChecklist (student_id) {
 	var template;
-	var course_list = getCourseList(student_id);
-	console.log("list: " + course_list);
+	var course_list;
+	getCourseList(student_id, function(courseList){
+		course_list=courseList;
+		console.log("list: " + course_list);
+	});
+	
 
 	MongoClient.connect(config.mongo.connect, function(err, db) {
 		if (err) {
@@ -37,7 +41,7 @@ function fillChecklist (student_id) {
 	})
 }
 
-function getCourseList (student_id) {
+function getCourseList (student_id, callback) {
 	var courseList = [];
 	MongoClient.connect(config.mongo.connect, function(err, db) {
 		if (err) {
@@ -60,7 +64,7 @@ function getCourseList (student_id) {
 					courseList.push(course.subject_code + " " + course.catalog);
 				});
 	    		console.log("Inside: " + courseList);
-		    	return courseList;
+		    	callback(courseList);
 		    });  
 	});
 }
