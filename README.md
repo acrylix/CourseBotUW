@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/acrylix/Enrollment-Assistant-API.png?label=ready&title=Ready)](https://waffle.io/acrylix/Enrollment-Assistant-API)
 # Enrollment-Assistant-API
 
 ```
