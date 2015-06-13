@@ -7,37 +7,74 @@ module.exports = {
 	getCourseFormat: getCourseFormat
 }
 
-function fillChecklist (student_id) {
-	var template;
-	var course_list;
+
+function findWildCardConstraint(constraint, course_list){
+	var prefix = constraint.replace("XX","");
+	for (var i = 0; i < course_list.length; i++) {
+		if(course_list[i].substring(0,prefix.length) == prefix){
+			return course_list[i];
+		}
+	};
+}
+
+function fillChecklist (student_id, callback) {
+	var course_list,plan_template,frontEnd_template;
 	getCourseList(student_id, function(courseList){
-		course_list=courseList;
-		console.log("list: " + course_list);
+		course_list = courseList;
+		var test = findWildCardConstraint('CS3XX',course_list);
+		getCheckList('CSBHC',function(planTemplate){
+			plan_template = planTemplate;
+
+			plan_template['Required Courses'].Requirements.forEach(function(unitGroup){
+				unitGroup.Requirements.forEach(function(item){
+					for (var i = 0; i < item.Constraints.length; i++) {
+						var constraint = item.Constraints[i];
+						var found = course_list.indexOf(constraint);
+						if(found != -1){
+							course_list.splice(found,1);
+							item.Selected = constraint;
+							delete item.Constraints;
+							unitGroup.Required--;
+							break;
+						}
+					};
+				})
+				callback(plan_template);
+				console.log(plan_template);
+			})
+		})
 	});
 	
+	return plan_template;
+}
 
+function getFrontEndTemplate(plan, callback){
 	MongoClient.connect(config.mongo.connect, function(err, db) {
-		if (err) {
-			return console.dir(err);
-		}
+		if (err) {return console.dir(err);}
 
+		db.collection('template')
+		.find({
+			plan:'CSBHC'
+		})
+		.toArray(function(err,doc) {
+	    	if(err) {throw err;}	    	
+    		callback(doc[0]);
+	    }); 
+	})
+}
+
+function getCheckList(plan, callback){
+	MongoClient.connect(config.mongo.connect, function(err, db) {
+		if (err) {return console.dir(err);}
 
 		db.collection('plans')
 		.find({
 			plan:'CSBHC'
 		})
 		.toArray(function(err,doc) {
-	    	if(err) {
-	    		throw err;
-	    	}
-	    	
-    		template = doc;
-			// console.log(template);
-
-	    	return doc;
+	    	if(err) {throw err;}	    	
+    		callback(doc[0]);
 	    }); 
-
-
 	})
 }
 
@@ -61,7 +98,7 @@ function getCourseList (student_id, callback) {
 		    	if(err)throw err;
 		    	
 	    		doc.forEach(function(course) {
-					courseList.push(course.subject_code + " " + course.catalog);
+					courseList.push(course.subject_code + course.catalog);
 				});
 	    		console.log("Inside: " + courseList);
 		    	callback(courseList);
