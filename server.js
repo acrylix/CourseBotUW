@@ -70,7 +70,7 @@ router.route('/findcourse/:course')
 router.route('/test/:student_id')
 	.get(function(req,res){
 		tools.fillChecklist(req.params.student_id,function(filledChecklist){
-			console.log('done');
+			res.json(filledChecklist);
 		});
 		//console.log("outside: " + tools.getCourseList(req.params.student_id));
 		//var studentPlan;

@@ -12,16 +12,51 @@ function findWildCardConstraint(constraint, course_list){
 	var prefix = constraint.replace("XX","");
 	for (var i = 0; i < course_list.length; i++) {
 		if(course_list[i].substring(0,prefix.length) == prefix){
-			return course_list[i];
+			return i;
 		}
 	};
+	return null;
+}
+
+function findRangeConstraint(constraint, course_list){
+	var constraint_subject_code = constraint.slice(0,constraint.indexOf(constraint.match(/\d/)));
+  	var constraint_catalog = constraint.slice(constraint.indexOf(constraint.match(/\d/)),constraint.length);
+  	var constraint_range = constraint_catalog.split('-').map(Number);
+
+  	for (var i = 0; i < course_list.length; i++) {
+  		var course_subject_code = course_list[i].slice(0,course_list[i].indexOf(course_list[i].match(/\d/)));
+  		var course_catalog = parseInt(course_list[i].slice(course_list[i].indexOf(course_list[i].match(/\d/)),course_list[i].length));
+  		if(course_subject_code == constraint_subject_code && course_catalog >= constraint_range[0] && course_catalog <= constraint_range[1]){
+  			return i;
+  		}
+  	};
+  	return null;
+}
+
+function findConstraint(constraint, course_list){
+	var result = -1;
+	if(constraint.indexOf("XX")!= -1){
+		result = findWildCardConstraint(constraint, course_list);
+	}
+	else if(constraint.indexOf("-")!=-1){
+		result = findRangeConstraint(constraint, course_list); 
+	}
+	else{
+		result = course_list.indexOf(constraint);
+	}
+
+	if(result > -1 && result !== null ){
+		var course = course_list[result];
+		course_list.splice(result,1);
+		return course;
+	}
+	return null;
 }
 
 function fillChecklist (student_id, callback) {
 	var course_list,plan_template,frontEnd_template;
 	getCourseList(student_id, function(courseList){
 		course_list = courseList;
-		var test = findWildCardConstraint('CS3XX',course_list);
 		getCheckList('CSBHC',function(planTemplate){
 			plan_template = planTemplate;
 
@@ -29,10 +64,9 @@ function fillChecklist (student_id, callback) {
 				unitGroup.Requirements.forEach(function(item){
 					for (var i = 0; i < item.Constraints.length; i++) {
 						var constraint = item.Constraints[i];
-						var found = course_list.indexOf(constraint);
-						if(found != -1){
-							course_list.splice(found,1);
-							item.Selected = constraint;
+						var courseFindResult = findConstraint(constraint,course_list);
+						if(courseFindResult != null){
+							item.Selected = courseFindResult;
 							delete item.Constraints;
 							unitGroup.Required--;
 							break;
