@@ -94,7 +94,7 @@ router.route('/template/')
 				throw err;
 			}
 
-			res.json(doc);
+			res.json(doc[0]);
 		});
 	});
 		console.log("template returned");
