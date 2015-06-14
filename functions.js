@@ -41,6 +41,15 @@ function findConstraint(constraint, course_list){
 	else if(constraint.indexOf("-")!=-1){
 		result = findRangeConstraint(constraint, course_list); 
 	}
+	else if(constraint === "MINOR"){
+		//
+	}
+	else if(constraint === "HUMANITIES"){
+		result = 0;//TEMP
+	}
+	else if (constraint === "SOCIALSCIENCE") {
+		result = 0;//TEMP
+	}
 	else{
 		result = course_list.indexOf(constraint);
 	}
@@ -53,6 +62,38 @@ function findConstraint(constraint, course_list){
 	return null;
 }
 
+function processElective(plan_section, plan_template, course_list){
+
+}
+
+function processConstraints(plan_section, plan_template, course_list, option){
+	for (var i = 0; i < plan_section.Requirements.length; i++) {
+		var unitGroup = plan_section.Requirements[i];
+		if(unitGroup.Requirements == undefined){
+			break;
+		}
+		for (var j = 0; j < unitGroup.Requirements.length; j++) {
+			var item = unitGroup.Requirements[j];
+			if (item.Name === "Elective breadth and depth requirements"){//item.Constraints === undefined && item.Requirements.length != 0
+				processConstraints(item.Requirements[0],plan_template,course_list);
+				break;
+			};
+			for (var k = 0; k < item.Constraints.length; k++) {
+				var constraint = item.Constraints[k];
+				var courseFindResult = findConstraint(constraint,course_list);
+				if(courseFindResult != null){
+					item.Selected = courseFindResult;
+					delete item.Constraints;
+					unitGroup.Required--;
+					if(unitGroup.Required == 0) break;
+					break;
+				}
+			};
+		};
+		if(option == 1)return;
+	};
+}
+
 function fillChecklist (student_id, callback) {
 	var course_list,plan_template,frontEnd_template;
 	getCourseList(student_id, function(courseList){
@@ -60,22 +101,10 @@ function fillChecklist (student_id, callback) {
 		getCheckList('CSBHC',function(planTemplate){
 			plan_template = planTemplate;
 
-			plan_template['Required Courses'].Requirements.forEach(function(unitGroup){
-				unitGroup.Requirements.forEach(function(item){
-					for (var i = 0; i < item.Constraints.length; i++) {
-						var constraint = item.Constraints[i];
-						var courseFindResult = findConstraint(constraint,course_list);
-						if(courseFindResult != null){
-							item.Selected = courseFindResult;
-							delete item.Constraints;
-							unitGroup.Required--;
-							break;
-						}
-					};
-				})
-				callback(plan_template);
-				console.log(plan_template);
-			})
+			processConstraints(plan_template['Required Courses'], plan_template, course_list);
+			processConstraints(plan_template['Additional Constraints'], plan_template, course_list);
+
+			callback(plan_template);
 		})
 	});
 	
@@ -140,7 +169,7 @@ function getCourseList (student_id, callback) {
 	});
 }
 
-function getCourseFormat (constraint){
+function getCourseFormat (constraint){//deprecated
 	MongoClient.connect(config.mongo.connect, function(err, db) {
 		  if(err) { 
 		  	return console.dir(err); 
