@@ -191,68 +191,6 @@
         ]
       },
       {
-        "Name": "4.0 Elective Units",
-        "Required": 8,
-        "Requirements": [
-          {
-            "Name": "1",
-            "Constraints": [
-              "ELECTIVE"
-            ],
-            "Selected": null
-          },
-          {
-            "Name": "2",
-            "Constraints": [
-              "ELECTIVE"
-            ],
-            "Selected": null
-          },
-          {
-            "Name": "3",
-            "Constraints": [
-              "ELECTIVE"
-            ],
-            "Selected": null
-          },
-          {
-            "Name": "4",
-            "Constraints": [
-              "ELECTIVE"
-            ],
-            "Selected": null
-          },
-          {
-            "Name": "5",
-            "Constraints": [
-              "ELECTIVE"
-            ],
-            "Selected": null
-          },
-          {
-            "Name": "6",
-            "Constraints": [
-              "ELECTIVE"
-            ],
-            "Selected": null
-          },
-          {
-            "Name": "7",
-            "Constraints": [
-              "ELECTIVE"
-            ],
-            "Selected": null
-          },
-          {
-            "Name": "8",
-            "Constraints": [
-              "ELECTIVE"
-            ],
-            "Selected": null
-          }
-        ]
-      },
-      {
         "Name": "5.0 Non-math Units",
         "Required": 10,
         "Requirements": [
@@ -323,6 +261,68 @@
             "Name": "10",
             "Constraints": [
               "NONMATH"
+            ],
+            "Selected": null
+          }
+        ]
+      },
+      {
+        "Name": "4.0 Elective Units",
+        "Required": 8,
+        "Requirements": [
+          {
+            "Name": "1",
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          },
+          {
+            "Name": "2",
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          },
+          {
+            "Name": "3",
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          },
+          {
+            "Name": "4",
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          },
+          {
+            "Name": "5",
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          },
+          {
+            "Name": "6",
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          },
+          {
+            "Name": "7",
+            "Constraints": [
+              "ELECTIVE"
+            ],
+            "Selected": null
+          },
+          {
+            "Name": "8",
+            "Constraints": [
+              "ELECTIVE"
             ],
             "Selected": null
           }
