@@ -8,10 +8,32 @@ module.exports = {
 }
 
 
-function findWildCardConstraint(constraint, course_list){
+function findElectiveConstraint(constraint, course_list) {
+	return 0;
+}
+
+function findNonmathConstraint(constraint, course_list) {
+	console.log("list length: " + course_list.length);
+	var exclude = ["CS", "MATH", "STAT", "CO"];
+	var constraint_subject_code = constraint.slice(0,constraint.indexOf(constraint.match(/\d/)));
+	var constraint_catalog = constraint.slice(constraint.indexOf(constraint.match(/\d/)),constraint.length);
+
+	for (var i=0; i< course_list.length; i++) {
+		if (exclude.indexOf(constraint_subject_code) > -1) {
+			// course is a Math course, ignore
+			continue;
+		}
+
+		return i;
+	}
+
+	return -1;
+}
+
+function findWildCardConstraint(constraint, course_list) {
 	var prefix = constraint.replace("XX","");
 	for (var i = 0; i < course_list.length; i++) {
-		if(course_list[i].substring(0,prefix.length) == prefix){
+		if(course_list[i].substring(0,prefix.length) == prefix) {
 			return i;
 		}
 	};
@@ -50,6 +72,12 @@ function findConstraint(constraint, course_list){
 	else if (constraint === "SOCIALSCIENCE") {
 		result = 0;//TEMP
 	}
+	else if (constraint === "ELECTIVE") {
+		result = findElectiveConstraint(constraint, course_list);
+	}
+	else if (constraint === "NONMATH") {
+		result = findNonmathConstraint(constraint, course_list);
+	}
 	else{
 		result = course_list.indexOf(constraint);
 	}
@@ -62,9 +90,6 @@ function findConstraint(constraint, course_list){
 	return null;
 }
 
-function processElective(plan_section, plan_template, course_list){
-
-}
 
 function processConstraints(plan_section, plan_template, course_list, option){
 	for (var i = 0; i < plan_section.Requirements.length; i++) {
@@ -78,9 +103,11 @@ function processConstraints(plan_section, plan_template, course_list, option){
 				processConstraints(item.Requirements[0],plan_template,course_list);
 				break;
 			};
+
 			for (var k = 0; k < item.Constraints.length; k++) {
 				var constraint = item.Constraints[k];
 				var courseFindResult = findConstraint(constraint,course_list);
+				console.log(constraint + ": " + courseFindResult);
 				if(courseFindResult != null){
 					item.Selected = courseFindResult;
 					delete item.Constraints;
@@ -151,6 +178,7 @@ function getCourseList (student_id, callback) {
 		db.collection('students')
 		.find({
 			uw_id: parseInt(student_id),
+			subject_code: {$nin: ["PD","COOP"]},
 			'details.units_attempted':{$ne: 0}
 		},{
 			subject_code:1,

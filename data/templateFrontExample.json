@@ -104,44 +104,6 @@
         ]
       },
       {
-        "Name": "4.0 Elective Units",
-        "Completed": false,
-        "Requirements": [
-          {
-            "Name": "1: ECON 101",
-            "Completed": true
-          },
-          {
-            "Name": "2: FR 192A",
-            "Completed": true
-          },
-          {
-            "Name": "3: FR 192B",
-            "Completed": true
-          },
-          {
-            "Name": "4",
-            "Completed": false
-          },
-          {
-            "Name": "5",
-            "Completed": false
-          },
-          {
-            "Name": "6",
-            "Completed": false
-          },
-          {
-            "Name": "7",
-            "Completed": false
-          },
-          {
-            "Name": "8",
-            "Completed": false
-          }
-        ]
-      },
-      {
         "Name": "5.0 Non-math Units",
         "Completed": false,
         "Requirements": [
@@ -183,6 +145,44 @@
           },
           {
             "Name": "10",
+            "Completed": false
+          }
+        ]
+      },
+      {
+        "Name": "4.0 Elective Units",
+        "Completed": false,
+        "Requirements": [
+          {
+            "Name": "1: ECON 101",
+            "Completed": true
+          },
+          {
+            "Name": "2: FR 192A",
+            "Completed": true
+          },
+          {
+            "Name": "3: FR 192B",
+            "Completed": true
+          },
+          {
+            "Name": "4",
+            "Completed": false
+          },
+          {
+            "Name": "5",
+            "Completed": false
+          },
+          {
+            "Name": "6",
+            "Completed": false
+          },
+          {
+            "Name": "7",
+            "Completed": false
+          },
+          {
+            "Name": "8",
             "Completed": false
           }
         ]
