@@ -15,4 +15,6 @@
      ~~            \|__|         \/__/         \/__/         \/__/    
 ```
 
-API 
+Issues/Enhancements
+
+[![Throughput Graph](https://graphs.waffle.io/acrylix/Enrollment-Assistant-API/throughput.svg)](https://waffle.io/acrylix/Enrollment-Assistant-API/metrics)
