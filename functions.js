@@ -55,7 +55,7 @@ function findRangeConstraint(constraint, course_list){
   	return null;
 }
 
-function findConstraint(constraint, course_list){
+function findConstraint(constraint, course_list, option){
 	var result = -1;
 	if(constraint.indexOf("XX")!= -1){
 		result = findWildCardConstraint(constraint, course_list);
@@ -83,8 +83,12 @@ function findConstraint(constraint, course_list){
 	}
 
 	if(result > -1 && result !== null ){
+
 		var course = course_list[result];
-		course_list.splice(result,1);
+		
+		if (option != 1) {
+			course_list.splice(result,1);
+		}
 		return course;
 	}
 	return null;
@@ -106,7 +110,7 @@ function processConstraints(plan_section, plan_template, course_list, option){
 
 			for (var k = 0; k < item.Constraints.length; k++) {
 				var constraint = item.Constraints[k];
-				var courseFindResult = findConstraint(constraint,course_list);
+				var courseFindResult = findConstraint(constraint,course_list, option);
 				console.log(constraint + ": " + courseFindResult);
 				if(courseFindResult != null){
 					item.Selected = courseFindResult;
@@ -129,8 +133,9 @@ function fillChecklist (student_id, callback) {
 		getCheckList('CSBHC',function(planTemplate){
 			plan_template = planTemplate;
 
+			processConstraints(plan_template['Additional Constraints'], plan_template, course_list, 1);
 			processConstraints(plan_template['Required Courses'], plan_template, course_list);
-			processConstraints(plan_template['Additional Constraints'], plan_template, course_list);
+			
 
 			callback(plan_template);
 		})
