@@ -184,7 +184,7 @@ function getCourseList (student_id, callback) {
 		db.collection('students')
 		.find({
 			uw_id: parseInt(student_id),
-			subject_code: {$nin: ["PD","COOP"]},
+			subject_code: {$nin: ["PD","COOP","WKRPT"]},
 			'details.units_attempted':{$ne: 0}
 		},{
 			subject_code:1,
