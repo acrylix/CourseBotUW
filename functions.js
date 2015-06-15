@@ -110,6 +110,7 @@ function processConstraints(plan_section, plan_template, course_list, option){
 				console.log(constraint + ": " + courseFindResult);
 				if(courseFindResult != null){
 					item.Selected = courseFindResult;
+					item.Name += ": " + courseFindResult;
 					delete item.Constraints;
 					unitGroup.Required--;
 					if(unitGroup.Required == 0) break;
