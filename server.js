@@ -100,6 +100,17 @@ router.route('/template/')
 		console.log("template returned");
 	});
 
+router.route('/scrape/:year/:plan')
+	.get(function(req,res) {
+		MongoClient.connect(config.mongo.connect, function(err, db) {
+			if (err) {
+				return console.dir(err);
+			}
+
+			tools.scrapeCsChecklist(req.params.year, req.params.plan);
+		})
+	});
+
 app.use('/api', router);
 
 // START THE SERVER
