@@ -63,13 +63,13 @@ router.route('/students/:student_id')
 
 router.route('/findcourse/:course')
 	.get(function(req,res){
-		console.log(checklistmodule.module.getCourseFormat(""+req.params.course));
+		console.log(checklistmodule.getCourseFormat(""+req.params.course));
 		//tools.getCourseList();
 	});
 
 router.route('/test/:student_id')
 	.get(function(req,res){
-		checklistmodule.module.fillChecklist(req.params.student_id,function(filledChecklist){
+		checklistmodule.fillChecklist(req.params.student_id,function(filledChecklist){
 			res.json(filledChecklist);
 		});
 		//console.log("outside: " + tools.getCourseList(req.params.student_id));
