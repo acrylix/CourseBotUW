@@ -9,6 +9,7 @@ var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var tools = require('./functions.js');
+var scrapeTools = require('./scrape.js')
 var config = require('./config');
 
 // configure app to use bodyParser()
@@ -107,7 +108,7 @@ router.route('/scrape/:year/:plan')
 				return console.dir(err);
 			}
 
-			tools.scrapeCsChecklist(req.params.year, req.params.plan);
+			scrapeTools.scrapeCsChecklist(req.params.year, req.params.plan);
 		})
 	});
 

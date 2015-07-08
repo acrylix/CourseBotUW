@@ -1,95 +1,11 @@
 var MongoClient = require('mongodb').MongoClient;
-var request = require("request");
-var cheerio = require("cheerio");
 var config = require('./config');
 
 module.exports = {
 	fillChecklist: fillChecklist,
 	getCourseList: getCourseList,
-	getCourseFormat: getCourseFormat,
-	scrapeCsChecklist: scrapeCsChecklist
+	getCourseFormat: getCourseFormat
 }
-
-function scrapeCsChecklist(year, plan) {
-	var url = "https://cs.uwaterloo.ca/current/programs/require/" + year + "-" + (parseInt(year)+1) + "/bcs.html";
-	
-	request(url, function(error, response, html){
-        // First we'll check to make sure no errors occurred when making the request
-        if(!error){
-            // Next, we'll utilize the cheerio library on the returned html which will essentially give us jQuery functionality
-
-            var $ = cheerio.load(html);
-
-            // Finally, we'll define the variables we're going to capture
-
-            var requiredCourses, additionalConstraints;
-            var template = {
-            	"plan" : "CSBHC",
-            	"Required Courses" : {},
-            	"Additional Constraints" : {}
-            };
-
-            // ================
-            // REQUIRED COURSES
-            // ================
-
-            // loop through each section of required courses
-            template["Required Courses"] = {
-            	"Required" : $('.require').find('.top-level').length,
-            	"Requirements": []
-        	};
-
-            $('.require').find('.top-level').map(function(i, section) {
-            	section = $(section);
-
-            	var sectionName = section.first().contents().filter(function () {
-            		return this.type === 'text';
-            	}).text();
-
-
-            	template["Required Courses"]["Requirements"].push({
-            		"Name": sectionName.trim(),
-            		"Required": section.find('li').length,
-            		"Requirements": []
-            	});
-
-            	section.find('li').map(function(j, entry) {
-            		entry = $(entry);
-
-
-            		var courseString = entry.first().contents().filter(function () {
-            			return this.type === 'text';
-            		}).text();
-
-            		template["Required Courses"]["Requirements"][i]["Requirements"].push({
-            			"Name": courseString.trim(),
-            			"Constraints": [],
-            			"Selected": null
-            		});
-
-            		// console.log(courseString);
-            	});
-            });
-
-            // ======================
-            // ADDITIONAL CONSTRAINTS
-            // ======================
-            template["Additional Constraints"] = {
-            	"Required" : $('.constraints').find('.top-level').length,
-            	"Requirements": []
-        	};
-
-
-            // $('.constraints').children('ul').map(function(i, elem) {
-            // 	elem = $(elem);
-
-            // 	}
-            // });
-            console.log(JSON.stringify(template));
-        }
-    })
-}
-
 
 function findElectiveConstraint(constraint, course_list) {
 	return 0;
