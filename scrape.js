@@ -6,7 +6,7 @@ module.exports = {
 }
 
 
-function scrapeCsChecklist(year, plan) {
+function scrapeCsChecklist(year, plan, callback) {
 	var url = "https://cs.uwaterloo.ca/current/programs/require/" + year + "-" + (parseInt(year)+1) + "/bcs.html";
 	
 	request(url, function(error, response, html){
@@ -201,7 +201,8 @@ function scrapeCsChecklist(year, plan) {
                     template["Additional Constraints"]["Requirements"].push(object);
             });
 
-            console.log(JSON.stringify(template));
+            callback(template);
+            return template;
         }
     });
 }

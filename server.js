@@ -109,7 +109,9 @@ router.route('/scrape/:year/:plan')
 				return console.dir(err);
 			}
 
-			scrapeTools.scrapeCsChecklist(req.params.year, req.params.plan);
+			scrapeTools.scrapeCsChecklist(req.params.year, req.params.plan, function(template) {
+				res.json(template);
+			});
 		})
 	});
 
