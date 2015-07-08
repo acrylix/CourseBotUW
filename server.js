@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var tools = require('./functions.js');
 var scrapeTools = require('./scrape.js')
+var checklistmodule = require('./checklistmodule.js');
 var config = require('./config');
 
 // configure app to use bodyParser()
@@ -64,13 +65,13 @@ router.route('/students/:student_id')
 
 router.route('/findcourse/:course')
 	.get(function(req,res){
-		console.log(tools.getCourseFormat(""+req.params.course));
+		console.log(checklistmodule.module.getCourseFormat(""+req.params.course));
 		//tools.getCourseList();
 	});
 
 router.route('/test/:student_id')
 	.get(function(req,res){
-		tools.fillChecklist(req.params.student_id,function(filledChecklist){
+		checklistmodule.module.fillChecklist(req.params.student_id,function(filledChecklist){
 			res.json(filledChecklist);
 		});
 		//console.log("outside: " + tools.getCourseList(req.params.student_id));
