@@ -38,27 +38,18 @@ function scrapeCsChecklist(year, plan) {
             $('.require').find('.top-level').map(function(i, section) {
                 section = $(section);
 
-                var sectionName = section.first().contents().filter(function () {
-                    return this.type === 'text';
-                }).text().trim();
-
 
                 template["Required Courses"]["Requirements"].push({
-                    "Name": sectionName,
+                    "Name": getDomText(section),
                     "Required": section.find('li').length,
                     "Requirements": []
                 });
 
-                section.find('li').map(function(j, entry) {
-                    entry = $(entry);
-
-
-                    var courseString = entry.first().contents().filter(function () {
-                        return this.type === 'text';
-                    }).text().trim();
+                section.find('li').map(function(j, constraint) {
+                    constraint = $(constraint);
 
                     template["Required Courses"]["Requirements"][i]["Requirements"].push({
-                        "Name": courseString,
+                        "Name": getDomText(constraint),
                         "Constraints": [],
                         "Selected": null
                     });
@@ -83,10 +74,8 @@ function scrapeCsChecklist(year, plan) {
 
             $(firstUl).children().map(function(i, item) {
                 item = $(item);
-                var itemName = item.first().contents().filter(function() {
-                    return this.type === 'text';
-                }).text().trim();
 
+                var itemName = getDomText(item);
                 switch (i) {
                     case 0:
                         var object = {
@@ -101,12 +90,8 @@ function scrapeCsChecklist(year, plan) {
                         item.find('li').map(function(j, constraint) {
                             constraint = $(constraint);
 
-                            var constraintName = constraint.first().contents().filter(function() {
-                                return this.type === 'text';
-                            }).text().trim();
-
                             var constraintObj = {
-                                "Name": constraintName,
+                                "Name": getDomText(constraint),
                                 "Constraints": [],
                                 "Selected": null
                             }
@@ -127,12 +112,59 @@ function scrapeCsChecklist(year, plan) {
                         // one level lower
                         item.children().first().children().map(function(j, section) {
                             section = $(section);
-                            var sectionName = section.first().contents().filter(function() {
-                                return this.type === 'text';
-                            }).text().trim();
+                            var sectionName = getDomText(section);
 
-                            switch (i) {
+                            switch (j) {
                                 case 0:
+                                    var object = {
+                                        "Name": "Elective breadth and depth requirement:",
+                                        "Required": section.children().length,
+                                        "Requirements": []
+                                    };
+
+                                    template["Additional Constraints"]["Requirements"][i]["Requirements"].push(object);
+
+                                    // second level lower
+                                    section.children().last().children().map(function(k, subsection) {
+                                        subsection = $(subsection);
+
+                                        var subsectionName = getDomText(subsection);
+                                        switch(k) {
+                                            case 0:
+                                                var object = {
+                                                    "Name": subsectionName,
+                                                    "Required": subsection.find('li').length,
+                                                    "Requirements": []
+                                                }
+
+                                                template["Additional Constraints"]["Requirements"][i]["Requirements"][j]["Requirements"].push(object);
+
+                                                break;
+                                            case 1:
+                                                var object = {
+                                                    "Name": subsectionName,
+                                                    "Required": 1,
+                                                    "Requirements": []
+                                                }
+
+                                                template["Additional Constraints"]["Requirements"][i]["Requirements"][j]["Requirements"].push(object);
+                                                break;
+                                            default:
+                                                break;
+                                        }
+
+                                        subsection.find('li').map(function(l, constraint) {
+                                            constraint = $(constraint);
+
+                                            var constraintObj = {
+                                                "Name": getDomText(constraint),
+                                                "Constraints": [],
+                                                "Selected": null
+                                            } 
+
+                                            template["Additional Constraints"]["Requirements"][i]["Requirements"][j]["Requirements"][k]["Requirements"].push(constraintObj);             
+                                        });
+                                    });
                                     break;
                                 case 1:
                                     var object = {
@@ -141,11 +173,11 @@ function scrapeCsChecklist(year, plan) {
                                         "Selected": null
                                     };
                                     
+                                    template["Additional Constraints"]["Requirements"][i]["Requirements"].push(object);
                                     break;
                                 default:
                                     break;
                             }
-                            console.log(sectionName);
                         });
                         break;
                     default:
@@ -156,11 +188,9 @@ function scrapeCsChecklist(year, plan) {
             // parse second <ul>
             var secondUl = $('.constraints').find('ul').last();
 
-            $(secondUl).children().map(function(i, item) {
-                item = $(item);
-                var itemName = item.first().contents().filter(function() {
-                    return this.type === 'text';
-                }).text().trim();
+            $(secondUl).children().map(function(i, constraint) {
+                constraint = $(constraint);
+                var itemName = getDomText(constraint);
 
                     var object = {
                         "Name": itemName,
@@ -174,6 +204,25 @@ function scrapeCsChecklist(year, plan) {
             console.log(JSON.stringify(template));
         }
     });
+}
+
+// grabs the text between the immediate HTML tags, regardless of any children
+// eg. <div>test<div> ... </div></div> will only return "test", not what's in the
+// child div
+function getDomText(elem) {
+    var text = elem.first().contents().filter(function() {
+        return this.type === 'text';
+    }).text().trim();
+
+    while (text.indexOf('\t') > -1) {
+        text = text.replace('\t', '');
+    }
+
+    while (text.indexOf('\n') > -1) {
+         text = text.replace('\n', '');
+    }
+
+    return text;
 }
 
 
