@@ -8,7 +8,6 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
-var tools = require('./functions.js');
 var scrapeTools = require('./scrape.js')
 var checklistmodule = require('./checklistmodule.js');
 var config = require('./config');
