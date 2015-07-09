@@ -2,7 +2,80 @@ var request = require("request");
 var cheerio = require("cheerio");
 
 module.exports = {
-    scrapeCsChecklist: scrapeCsChecklist
+    scrapeChecklist: scrapeCsChecklist,
+}
+
+
+var nameToConstraintMap = {
+    "4.0 Elective units": "ELECTIVE",
+    "5.0 Non-math units": "NONMATH",
+    "One of CS 343, 349, 442, 444, 445, 446, 447, 450, 452, 454, 456, 457, 458": ["CS343","CS349","CS442","CS444","CS445","CS446","CS447","CS450","CS452","CS454","CS456","CS457","CS458"],
+    "One of CS 348, 448, 449, 473, 476, 482, 484, 485, 486, 488": ["CS348","CS448","CS449","CS473","CS476","CS482","CS484","CS485","CS486","CS488"],
+    "One of CS 360, 365, 370, 371, 462, 466, 467, 475, 487": ["CS360","CS365","CS370","CS371","CS462","CS466","CS467","CS475","CS487"],
+    "1.0 units from the humanities": ["HUMANITIES", "HUMANITIES"],
+    "1.0 units from the social sciences": ["SOCIALSCIENCE", "SOCIALSCIENCE"],
+    "0.5 units from the pure sciences": ["PURESCIENCE"],
+    "0.5 units from the pure and applied sciences": ["APPLIEDSCIENCE"],
+    "1.5 units in the same subject area with at least 0.5 units at the  3rd year level or higher": ["DEPTH1"],
+    "1.5 units with the same subject forming a prerequisite chain of length three": ["DEPTH2"],
+    "Seven (regular) or eight (co-op) terms enrolled in at least three courses totaling 1.5 units": ["TERMSENROLLED"],
+    "No more than 2.0 units of failed courses": ["FAILEDCOURSES"],
+    "No more than 5.0 units of unusable course attempts (failures, withdrawals, and repeats of passed courses)": ["UNUSABLECOURSES"],
+    "CS major average of 60% or higher": ["CSMAJORAVERAGE"],
+    "Cumulative average of 60% or higher Co-op requirements met, if applicable, including a minimum of five PD courses.": ["CUMULATIVEAVERAGE_PD"]
+}
+
+
+
+function mapCsConstraints(constraintName) {
+    return nameToConstraintMap[constraintName];
+}
+
+function parseCsConstraints(constraintName) {
+    var constraintList = [];
+    var codeList = [];
+    var planList = [];
+    var split = constraintName.split(' ');
+
+    for (var i in split) {
+        var substr = split[i];
+        // ignore nonnumeric substrings like course plan ("CS", "ENG", etc)
+        if (isNumeric(substr[0])) {
+            
+            if (substr.indexOf('[') > -1) {
+                var start = substr.indexOf('[');
+                var end = substr.indexOf(']');
+                if (start < end) {
+                    for (var i=start+1; i<end; i++) {
+                        var temp = substr.substring(0, start) + substr[i] + substr.substring(end+1);
+                        codeList.push(temp);
+                    }
+                }
+
+            } else if (substr.indexOf('-') > -1) {
+                substr = substr.replace(';', '');
+
+                codeList.push(substr);
+            } else {
+                codeList.push(substr);
+            }
+        } else {
+            if (substr !== "or") {
+                planList.push(substr);
+            }
+        }
+    }
+
+    var prevPlan = planList[0];
+    for (var i in codeList) {
+        if (i >= planList.length) {
+            constraintList.push(prevPlan+codeList[i]);
+        } else {
+           constraintList.push(planList[i]+codeList[i]);
+        }
+    }
+
+    return constraintList;
 }
 
 
@@ -38,19 +111,19 @@ function scrapeCsChecklist(year, plan, callback) {
             $('.require').find('.top-level').map(function(i, section) {
                 section = $(section);
 
-
+                var sectionName = getDomText(section);
                 template["Required Courses"]["Requirements"].push({
-                    "Name": getDomText(section),
+                    "Name": sectionName,
                     "Required": section.find('li').length,
                     "Requirements": []
                 });
 
                 section.find('li').map(function(j, constraint) {
                     constraint = $(constraint);
-
+                    var constraintName = getDomText(constraint);
                     template["Required Courses"]["Requirements"][i]["Requirements"].push({
-                        "Name": getDomText(constraint),
-                        "Constraints": [],
+                        "Name": (i === 0 || i === 2) ? constraintName : j+"",
+                        "Constraints": (i === 0 || i === 2) ? parseCsConstraints(constraintName) : mapCsConstraints(sectionName),
                         "Selected": null
                     });
 
@@ -89,10 +162,10 @@ function scrapeCsChecklist(year, plan, callback) {
                         // one level lower
                         item.find('li').map(function(j, constraint) {
                             constraint = $(constraint);
-
+                            var constraintName = getDomText(constraint);
                             var constraintObj = {
-                                "Name": getDomText(constraint),
-                                "Constraints": [],
+                                "Name": constraintName,
+                                "Constraints": mapCsConstraints(constraintName),
                                 "Selected": null
                             }
 
@@ -155,10 +228,11 @@ function scrapeCsChecklist(year, plan, callback) {
 
                                         subsection.find('li').map(function(l, constraint) {
                                             constraint = $(constraint);
+                                            var constraintName = getDomText(constraint);
 
                                             var constraintObj = {
-                                                "Name": getDomText(constraint),
-                                                "Constraints": [],
+                                                "Name": constraintName,
+                                                "Constraints": mapCsConstraints(constraintName),
                                                 "Selected": null
                                             } 
 
@@ -169,7 +243,7 @@ function scrapeCsChecklist(year, plan, callback) {
                                 case 1:
                                     var object = {
                                         "Name": sectionName,
-                                        "Constraints": [],
+                                        "Constraints": ["ALTERNATE"],
                                         "Selected": null
                                     };
                                     
@@ -190,11 +264,11 @@ function scrapeCsChecklist(year, plan, callback) {
 
             $(secondUl).children().map(function(i, constraint) {
                 constraint = $(constraint);
-                var itemName = getDomText(constraint);
-
+                var constraintName = getDomText(constraint);
+                    console.log(constraintName);
                     var object = {
-                        "Name": itemName,
-                        "Constraints": [],
+                        "Name": constraintName,
+                        "Constraints": mapCsConstraints(constraintName),
                         "Selected": null
                     }
 
@@ -205,6 +279,11 @@ function scrapeCsChecklist(year, plan, callback) {
             return template;
         }
     });
+}
+
+// checks if a string is a number
+function isNumeric(obj) {
+    return obj - parseFloat(obj) >= 0;
 }
 
 // grabs the text between the immediate HTML tags, regardless of any children
