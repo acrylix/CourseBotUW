@@ -129,8 +129,7 @@ function scrapeEngChecklist(plan, callback) {
             });
 
 
-            // callback(template);
-            console.log(JSON.stringify(template));
+            callback(template);
             return template;
         } else {
             console.log("ERR: unable to retrieve checklist");
