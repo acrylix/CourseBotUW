@@ -101,18 +101,19 @@ router.route('/template/')
 		console.log("template returned");
 	});
 
-router.route('/scrape/:year/:plan')
+router.route('/scrapeCs/:year/:plan')
 	.get(function(req,res) {
-		MongoClient.connect(config.mongo.connect, function(err, db) {
-			if (err) {
-				return console.dir(err);
-			}
-
-			scrapeTools.scrapeChecklist(req.params.year, req.params.plan, function(template) {
-				res.json(template);
-			});
-		})
+		scrapeTools.scrapeCsChecklist(req.params.year, req.params.plan, function(template) {
+			res.json(template);
+		});
 	});
+
+router.route('/scrapeEng/:plan')
+	.get(function(req,res) {
+		scrapeTools.scrapeEngChecklist(req.params.plan, function(template) {
+			res.json(template);
+		})
+	})
 
 app.use('/api', router);
 
