@@ -9,6 +9,7 @@ var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var checklistmodule = require('./checklistmodule.js');
+var enrollmentmodule = require('./enrollmentmodule.js');
 var config = require('./config');
 
 // configure app to use bodyParser()
@@ -99,6 +100,20 @@ router.route('/template/')
 	});
 		console.log("template returned");
 	});
+
+router.route('/enroll/shortlist')
+    .post(function(req, res) {
+        
+        var shortlist = req.body.course;  
+        
+        enrollmentmodule.processShortlist(shortlist, function(result){
+	       res.json(result);
+        });
+
+
+        
+    });
+
 
 app.use('/api', router);
 

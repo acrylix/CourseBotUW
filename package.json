@@ -4,7 +4,9 @@
 	"dependencies":{
 		"express":"~4.0.0",
 		"mongodb":"*",
-		"body-parser":"~1.0.1"
+		"body-parser":"~1.0.1",
+		"request":"*",
+		"promise":"*"
 	}
 
 }
