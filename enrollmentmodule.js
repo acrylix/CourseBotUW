@@ -8,7 +8,7 @@ module.exports = {
 }
 
 function processShortlist(shortlist, callback){
-	console.log(shortlist);
+	// console.log(shortlist);
     var shortlistJson = [];
 
     for (var i = 0; i < shortlist.length; i++) {
