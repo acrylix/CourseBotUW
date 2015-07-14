@@ -28,48 +28,14 @@ router.use(function(req,res,next){
 	next();
 });
 
-router.route('/students/:student_id')
-	.get(function(req,res){
 
-		MongoClient.connect(config.mongo.connect, function(err, db) {
-		  if(err) { 
-		  	return console.dir(err); 
-		  }
-		  console.log("------------------")
-		  console.log("Fetching for uw_id:"+req.params.student_id);
-		  console.log("Visiting from IP:"+req.connection.remoteAddress);
-		  console.log("------------------")
+// ================================================
+// CHECKLIST ROUTES
+// ================================================
 
-		  db.collection('students')
-		  //mongodb query
-		  .find(
-		  	{'uw_id':parseInt(req.params.student_id)},
-		  	{
-		  		_id:0,
-		  		uw_id:1,
-		  		term_id:1,
-		  		subject_code:1,
-		  		catalog:1,
-		  		attempt_class:1,
-		  		'details.units_earned':1,
-		  		'details.course_title':1,
-		  		'details.earn_credit':1,
-		  		'group_code':1
-		  	}).toArray(function(err,doc){
-		    	if(err)throw err;
 
-		    	res.json(doc);
-		    });  
-		});
-	});
 
-router.route('/findcourse/:course')
-	.get(function(req,res){
-		console.log(checklistmodule.getCourseFormat(""+req.params.course));
-		//tools.getCourseList();
-	});
-
-router.route('/test/:student_id')
+router.route('/checklist/:student_id')
 	.get(function(req,res){
 		checklistmodule.fillChecklist(req.params.student_id,function(filledChecklist){
 			res.json(filledChecklist);
@@ -78,30 +44,11 @@ router.route('/test/:student_id')
 		//var studentPlan;
 	});
 
-router.route('/template/')
-	.get(function(req,res) {
-		console.log("getting template");
+// ================================================
+// ENROLLMENT ROUTES
+// ================================================
 
-		MongoClient.connect(config.mongo.connect, function(err, db) {
-		if (err) {
-			return console.dir(err);
-		}
-
-		db.collection('template')
-		.find({
-			"plan": 'CSBHC'
-		})
-		.toArray(function(err,doc) {
-			if (err) {
-				throw err;
-			}
-
-			res.json(doc[0]);
-		});
-	});
-		console.log("template returned");
-	});
-
+// has no arguments, courses passed in through POST body
 router.route('/enroll/shortlist')
     .post(function(req, res) {
         
@@ -109,11 +56,12 @@ router.route('/enroll/shortlist')
         
         enrollmentmodule.processShortlist(shortlist, function(result){
 	       res.json(result);
-        });
-
-
-        
+        });        
     });
+
+// ================================================
+// SCRAPE ROUTES
+// ================================================
 
 router.route('/scrapeCs/:year/:plan')
 	.get(function(req,res) {
@@ -129,6 +77,84 @@ router.route('/scrapeEng/:plan')
 		})
 	})
 
+// ================================================
+// TEST ROUTES
+// ================================================
+
+router.route('/test/:student_id')
+	.get(function(req,res){
+		checklistmodule.fillChecklist(req.params.student_id,function(filledChecklist){
+			res.json(filledChecklist);
+		});
+		//console.log("outside: " + tools.getCourseList(req.params.student_id));
+		//var studentPlan;
+	});
+
+
+// router.route('/findcourse/:course')
+// 	.get(function(req,res){
+// 		console.log(checklistmodule.getCourseFormat(""+req.params.course));
+// 		//tools.getCourseList();
+// 	});
+
+// router.route('/students/:student_id')
+// 	.get(function(req,res){
+
+// 		MongoClient.connect(config.mongo.connect, function(err, db) {
+// 		  if(err) { 
+// 		  	return console.dir(err); 
+// 		  }
+// 		  console.log("------------------")
+// 		  console.log("Fetching for uw_id:"+req.params.student_id);
+// 		  console.log("Visiting from IP:"+req.connection.remoteAddress);
+// 		  console.log("------------------")
+
+// 		  db.collection('students')
+// 		  //mongodb query
+// 		  .find(
+// 		  	{'uw_id':parseInt(req.params.student_id)},
+// 		  	{
+// 		  		_id:0,
+// 		  		uw_id:1,
+// 		  		term_id:1,
+// 		  		subject_code:1,
+// 		  		catalog:1,
+// 		  		attempt_class:1,
+// 		  		'details.units_earned':1,
+// 		  		'details.course_title':1,
+// 		  		'details.earn_credit':1,
+// 		  		'group_code':1
+// 		  	}).toArray(function(err,doc){
+// 		    	if(err)throw err;
+
+// 		    	res.json(doc);
+// 		    });  
+// 		});
+// 	});
+//
+// router.route('/template/')
+// 	.get(function(req,res) {
+// 		console.log("getting template");
+
+// 		MongoClient.connect(config.mongo.connect, function(err, db) {
+// 		if (err) {
+// 			return console.dir(err);
+// 		}
+
+// 		db.collection('template')
+// 		.find({
+// 			"plan": 'CSBHC'
+// 		})
+// 		.toArray(function(err,doc) {
+// 			if (err) {
+// 				throw err;
+// 			}
+
+// 			res.json(doc[0]);
+// 		});
+// 	});
+// 		console.log("template returned");
+// 	});
 app.use('/api', router);
 
 // START THE SERVER
