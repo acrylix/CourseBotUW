@@ -5,8 +5,8 @@
 		"express":"~4.0.0",
 		"mongodb":"*",
 		"body-parser":"~1.0.1",
-		"request":"*",
-		"promise":"*"
+		"request": "latest",
+		"cheerio": "latest"
 	}
 
 }

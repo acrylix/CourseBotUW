@@ -8,6 +8,7 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
+var scrapeTools = require('./scrape.js')
 var checklistmodule = require('./checklistmodule.js');
 var enrollmentmodule = require('./enrollmentmodule.js');
 var config = require('./config');
@@ -101,6 +102,7 @@ router.route('/template/')
 		console.log("template returned");
 	});
 
+<<<<<<< HEAD
 router.route('/enroll/shortlist')
     .post(function(req, res) {
         
@@ -114,6 +116,21 @@ router.route('/enroll/shortlist')
         
     });
 
+=======
+router.route('/scrapeCs/:year/:plan')
+	.get(function(req,res) {
+		scrapeTools.scrapeCsChecklist(req.params.year, req.params.plan, function(template) {
+			res.json(template);
+		});
+	});
+
+router.route('/scrapeEng/:plan')
+	.get(function(req,res) {
+		scrapeTools.scrapeEngChecklist(req.params.plan, function(template) {
+			res.json(template);
+		})
+	})
+>>>>>>> e5bb0bee4b259c437538eab09bed68564377dd49
 
 app.use('/api', router);
 
