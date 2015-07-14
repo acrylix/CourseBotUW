@@ -102,7 +102,6 @@ router.route('/template/')
 		console.log("template returned");
 	});
 
-<<<<<<< HEAD
 router.route('/enroll/shortlist')
     .post(function(req, res) {
         
@@ -116,7 +115,6 @@ router.route('/enroll/shortlist')
         
     });
 
-=======
 router.route('/scrapeCs/:year/:plan')
 	.get(function(req,res) {
 		scrapeTools.scrapeCsChecklist(req.params.year, req.params.plan, function(template) {
@@ -130,7 +128,6 @@ router.route('/scrapeEng/:plan')
 			res.json(template);
 		})
 	})
->>>>>>> e5bb0bee4b259c437538eab09bed68564377dd49
 
 app.use('/api', router);
 
