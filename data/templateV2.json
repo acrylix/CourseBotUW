@@ -493,22 +493,46 @@
         ]
       },
       {
-        "Name": "Seven (regular) or eight (co-op) terms enrolled in at least three courses totalling 1.5 units"
+        "Name": "Seven (regular) or eight (co-op) terms enrolled in at least three courses totalling 1.5 units",
+        "Constraints": [
+          "TERMSENROLLED"
+        ],
+        "Selected": null
       },
       {
-        "Name": "No more than 3.0 units of excluded courses"
+        "Name": "No more than 3.0 units of excluded courses",
+        "Constraints": [
+          "FAILEDCOURSES"
+        ],
+        "Selected": null
       },
       {
-        "Name": "CS Major Average of 60% or higher"
+        "Name": "CS Major Average of 60% or higher",
+        "Constraints": [
+          "CSMAJORAVERAGE"
+        ],
+        "Selected": null
       },
       {
-        "Name": "Cumulative Average of 60% or higher"
+        "Name": "Cumulative Average of 60% or higher",
+        "Constraints": [
+          "CSCUMULATIVEAVERAGE"
+        ],
+        "Selected": null
       },
       {
-        "Name": "English Writing Skills"
+        "Name": "English Writing Skills",
+        "Constraints": [
+          "ENGLISHWRITING"
+        ],
+        "Selected": null
       },
       {
-        "Name": "Coop requirements met, if applicatable, including a minium of five PD courses"
+        "Name": "Coop requirements met, if applicatable, including a minium of five PD courses",
+        "Constraints": [
+          "COOPREQUIREMENTS"
+        ],
+        "Selected": null
       }
     ]
   }

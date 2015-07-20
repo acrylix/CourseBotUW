@@ -78,6 +78,27 @@ function findConstraint(constraint, course_list, option){
 	else if (constraint === "NONMATH") {
 		result = findNonmathConstraint(constraint, course_list);
 	}
+	else if (constraint === "TERMSENROLLED") {
+		return 1;
+	}
+	else if (constraint === "FAILEDCOURSES") {
+		return 1;
+	}
+	else if (constraint === "UNUSABLECOURSES") {
+		return 1;
+	}
+	else if (constraint === "CSMAJORAVERAGE") {
+		return 1;
+	}
+	else if (constraint === "CSCUMULATIVEAVERAGE") {
+		return 1;
+	}
+	else if (constraint === "ENGLISHWRITING") {
+		return 1;
+	}
+	else if (constraint === "COOPREQUIREMENTS") {
+		return 1;
+	}
 	else{
 		result = course_list.indexOf(constraint);
 	}
