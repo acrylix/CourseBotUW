@@ -78,27 +78,6 @@ function findConstraint(constraint, course_list, option){
 	else if (constraint === "NONMATH") {
 		result = findNonmathConstraint(constraint, course_list);
 	}
-	else if (constraint === "TERMSENROLLED") {
-		return 1;
-	}
-	else if (constraint === "FAILEDCOURSES") {
-		return 1;
-	}
-	else if (constraint === "UNUSABLECOURSES") {
-		return 1;
-	}
-	else if (constraint === "CSMAJORAVERAGE") {
-		return 1;
-	}
-	else if (constraint === "CSCUMULATIVEAVERAGE") {
-		return 1;
-	}
-	else if (constraint === "ENGLISHWRITING") {
-		return 1;
-	}
-	else if (constraint === "COOPREQUIREMENTS") {
-		return 1;
-	}
 	else{
 		result = course_list.indexOf(constraint);
 	}
@@ -116,7 +95,7 @@ function findConstraint(constraint, course_list, option){
 }
 
 
-function processConstraints(plan_section, plan_template, course_list, option){
+function processConstraints(plan_section, plan_template, course_list, option) {
 	for (var i = 0; i < plan_section.Requirements.length; i++) {
 		var unitGroup = plan_section.Requirements[i];
 		if(unitGroup.Requirements == undefined){
@@ -126,13 +105,34 @@ function processConstraints(plan_section, plan_template, course_list, option){
 			var item = unitGroup.Requirements[j];
 			if (item.Name === "Elective breadth and depth requirements"){//item.Constraints === undefined && item.Requirements.length != 0
 				processConstraints(item.Requirements[0],plan_template,course_list);
-				break;
 			};
+
+			console.log("Constraint: " + item.Constraints[0]);
+			if (item.Constraint === "TERMSENROLLED") {
+				return "passed";
+			}
+			else if (item.Constraint === "FAILEDCOURSES") {
+				return "passed";
+			}
+			else if (item.Constraint === "UNUSABLECOURSES") {
+				return "passed";
+			}
+			else if (item.Constraint === "CSMAJORAVERAGE") {
+				return "passed";
+			}
+			else if (item.Constraint === "CSCUMULATIVEAVERAGE") {
+				return "passed";
+			}
+			else if (item.Constraint === "ENGLISHWRITING") {
+				return "passed";
+			}
+			else if (item.Constraint === "COOPREQUIREMENTS") {
+				return "passed";
+			}
 
 			for (var k = 0; k < item.Constraints.length; k++) {
 				var constraint = item.Constraints[k];
 				var courseFindResult = findConstraint(constraint,course_list, option);
-				console.log(constraint + ": " + courseFindResult);
 				if(courseFindResult != null){
 					item.Selected = courseFindResult;
 					item.Name += ": " + courseFindResult;
@@ -218,7 +218,7 @@ function getCourseList (student_id, callback) {
 	    		doc.forEach(function(course) {
 					courseList.push(course.subject_code + course.catalog);
 				});
-	    		console.log("Inside: " + courseList);
+	    		
 		    	callback(courseList);
 		    });  
 	});

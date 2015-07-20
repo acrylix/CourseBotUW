@@ -49,16 +49,115 @@ router.route('/checklist/:student_id')
 // ================================================
 
 // has no arguments, courses passed in through POST body
-router.route('/enroll/shortlist')
+router.route('/enroll/shortlistGet/:student_id')///////////////////NOT DOIN RIGHT SHIT 
     .post(function(req, res) {
+        MongoClient.connect(config.mongo.connect, function(err, db) {
+		  if(err) { 
+		  	return console.dir(err); 
+		  }
+		  console.log("------------------")
+		  console.log("Fetching for uw_id:"+req.params.student_id);
+		  console.log("Visiting from IP:"+req.connection.remoteAddress);
+		  console.log("------------------")
+
+		  db.collection('StudentShortlist')
+		  //mongodb query
+		  .find(
+		  	{'uw_id':parseInt(req.params.student_id)},
+		  	{_id:0}
+		  ).toArray(function(err,doc){
+		    	if(err)throw err;
+
+		    	res.json(doc);
+		    });  
+		});
+
+        // var shortlist = req.body.course;  
         
-        var shortlist = req.body.course;  
-        
-        enrollmentmodule.processShortlist(shortlist, function(result){
-	       res.json(result);
-        });        
+        // enrollmentmodule.processShortlist(shortlist, function(result){
+	       // res.json(result);
+        // });        
     });
 
+router.route('/enroll/shortlistAdd/:student_id/:course')
+	.get(function(req, res) {
+		MongoClient.connect(config.mongo.connect, function(err, db) {
+			if (err) {
+				return console.dir(err);
+			}
+			var course = req.params.course;
+			var student_id = req.params.student_id;
+
+			db.collection('studentshortlist').find({'uw_id':parseInt(student_id)})
+			.toArray(function(err,doc){
+		    	if(err)throw err;
+
+		    	var courseList = doc[0].courses;
+		    	courseList.push(course);
+
+		    	db.collection('studentshortlist').update({'uw_id':parseInt(student_id)}, {$set:{courses:courseList}}, 
+		    		function(err, result) {
+				    if (err)throw err;
+
+	    			res.json("Success");
+				    
+				});
+		    });  
+		})
+	})
+
+router.route('/enroll/mockdata')
+	.get(function(req, res) {
+		MongoClient.connect(config.mongo.connect, function(err, db) {
+		  if(err) { 
+		  	return console.dir(err); 
+		  }
+		  
+
+		  db.collection('mockdata')
+		  //mongodb query
+		  .find(
+		  	{'uw_id':1009},
+		  	{_id:0}
+		  ).toArray(function(err,doc){
+		    	if(err)throw err;
+
+		    	res.json(doc[0]);
+		    });  
+		});
+	})
+
+router.route('/enroll/shortlistDelete/:student_id/:course')
+	.get(function(req, res) {
+		MongoClient.connect(config.mongo.connect, function(err, db) {
+			if (err) {
+				return console.dir(err);
+			}
+			var course = req.params.course;
+			var student_id = req.params.student_id;
+
+			db.collection('studentshortlist').find({'uw_id':parseInt(student_id)})
+			.toArray(function(err,doc){
+		    	if(err)throw err;
+
+		    	var courseList = doc[0].courses;
+
+		    	for (var i = 0; i < courseList.length; i++) {
+		    		if(courseList[i] == course){
+		    			courseList.splice(i,1);
+		    		}
+		    	};
+
+		    	db.collection('studentshortlist').update({'uw_id':parseInt(student_id)}, {$set:{courses:courseList}}, 
+		    		function(err, result) {
+					    if (err)throw err;
+
+		    			res.json("Success");
+					    
+					});
+		    });  
+		})
+	})
 // ================================================
 // SCRAPE ROUTES
 // ================================================
