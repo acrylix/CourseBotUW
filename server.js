@@ -95,14 +95,14 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 					for (var i = 0; i < doc[0].Shortlist.length; i++) {
 						if(doc[0].Shortlist[i].Course == course){
 
-							res.json({"err":"duplicate"});
+							res.json({"err":"Already shortlisted " + doc[0].Shortlist[i].Course});
 							return;
 						}
 					}
 
 					for (var i = 0; i < doc[0].Enrolled.length; i++) {
 						if(doc[0].Enrolled[i].Course == course){
-							res.json({"err":"already enrolled"});
+							res.json({"err":"Already enrolled in " + doc[0].Enrolled[i].Course});
 							return;
 						}
 					}
@@ -110,7 +110,7 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 						var obj = enrollmentmodule.getCourseInfo(course, doc[0], function(classes, fulldoc){
 
 							if(classes.length == 0){
-								res.json({"err":"not offered"});
+								res.json({"err": course + " is not offered this term"});
 								return;
 							}
 
