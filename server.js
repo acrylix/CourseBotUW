@@ -98,6 +98,37 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 		    	db.collection('studentshortlist').update({'uw_id':parseInt(student_id)}, {$set:{courses:courseList}}, 
 		    		function(err, result) {
 				    if (err)throw err;
+					var obj = enrollmentmodule.getCourseInfo(course, doc[0], function(classes, fulldoc){
+
+						var classObj = new Object();
+						classObj.Course = course;
+						classObj.Sections = [];
+
+						var totalCap=0;
+						var curCap=0;
+						for (var i = 0; i < classes.length; i++) {
+
+							var lecObj = new Object();
+							lecObj.name = classes[i].section;
+							lecObj.capacity = classes[i].enrollment_total+"/"+classes[i].enrollment_capacity;
+							totalCap+=classes[i].enrollment_capacity;
+							curCap+=classes[i].enrollment_total;
+
+							classObj.Sections.push(lecObj);
+						}
+
+						classObj.Capacity = curCap+"/"+totalCap;
+
+						fulldoc.Shortlist.push(classObj);
+
+						db.collection('mockdata').update({'uw_id':parseInt(student_id)}, {$set:{Shortlist:fulldoc.Shortlist}},
+				    		function(err, result) {
+						    if (err)throw err;
+
+			    			res.json(fulldoc);
+
+						});
+					})
 
 	    			res.json("Success");
 				    
