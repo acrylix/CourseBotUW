@@ -115,10 +115,13 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 
 						fulldoc.Shortlist.push(classObj);
 
-						res.json(fulldoc);
-						//
+						db.collection('mockdata').update({'uw_id':parseInt(student_id)}, {$set:{Shortlist:fulldoc.Shortlist}},
+				    		function(err, result) {
+						    if (err)throw err;
 
+			    			res.json(fulldoc);
 
+						});
 					})
 
 		    // 	var courseList = doc[0].courses;
