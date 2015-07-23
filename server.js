@@ -100,13 +100,6 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 						}
 					}
 
-		    	var courseList = doc[0].courses;
-		    	courseList.push(course);
-
-		    	db.collection('studentshortlist').update({'uw_id':parseInt(student_id)}, {$set:{courses:courseList}},
-		    		function(err, result) {
-				    if (err)throw err;
-
 						var obj = enrollmentmodule.getCourseInfo(course, doc[0], function(classes, fulldoc){
 
 							if(classes.length == 0){
@@ -144,11 +137,6 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 
 							});
 						})
-
-
-	    			res.json("Success");
-
-				});
 		    });
 		})
 	})
