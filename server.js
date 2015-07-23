@@ -85,7 +85,7 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 			if (err) {
 				return console.dir(err);
 			}
-			var course = req.params.course;
+			var course = req.params.course.toUpperCase();
 			var student_id = req.params.student_id;
 
 			db.collection('mockdata').find({'uw_id':parseInt(student_id)})
@@ -96,6 +96,13 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 						if(doc[0].Shortlist[i].Course == course){
 
 							res.json("duplicate");
+							return;
+						}
+					}
+
+					for (var i = 0; i < doc[0].Enrolled.length; i++) {
+						if(doc[0].Enrolled[i].Course == course){
+							res.json("already enrolled");
 							return;
 						}
 					}
