@@ -347,27 +347,27 @@
       },
       {
         "Name": "Seven (regular) or eight (co-op) terms enrolled in at least three courses totalling 1.5 units",
-        "Selected": true
+        "Selected": "true"
       },
       {
         "Name": "No more than 3.0 units of excluded courses",
-        "Selected": true
+        "Selected": "true"
       },
       {
         "Name": "CS Major Average of 60% or higher",
-        "Selected": true
+        "Selected": "true"
       },
       {
         "Name": "Cumulative Average of 60% or higher",
-        "Selected": true
+        "Selected": "true"
       },
       {
         "Name": "English Writing Skills",
-        "Selected": true
+        "Selected": "true"
       },
       {
         "Name": "Coop requirements met, if applicatable, including a minium of five PD courses",
-        "Selected": true
+        "Selected": "true"
       }
     ]
   }
