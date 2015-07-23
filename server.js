@@ -109,7 +109,7 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 
 							var classObj = new Object();
 							classObj.Course = course;
-							classObj.title = classes[0].title;
+							classObj.Title = classes[0].title;
 							classObj.Sections = [];
 
 							var totalCap=0;
@@ -117,8 +117,8 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 							for (var i = 0; i < classes.length; i++) {
 
 								var lecObj = new Object();
-								lecObj.name = classes[i].section;
-								lecObj.capacity = classes[i].enrollment_total+"/"+classes[i].enrollment_capacity;
+								lecObj.Name = classes[i].section;
+								lecObj.Capacity = classes[i].enrollment_total+"/"+classes[i].enrollment_capacity;
 								totalCap+=classes[i].enrollment_capacity;
 								curCap+=classes[i].enrollment_total;
 
