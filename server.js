@@ -181,12 +181,24 @@ router.route('/scrapeEng/:plan')
 // ================================================
 
 router.route('/test/:student_id')
-	.get(function(req,res){
-		checklistmodule.fillChecklist(req.params.student_id,function(filledChecklist){
-			res.json(filledChecklist);
+	.get(function(req, res) {
+		MongoClient.connect(config.mongo.connect, function(err, db) {
+		  if(err) { 
+		  	return console.dir(err); 
+		  }
+		  
+
+		  db.collection('studentsmock')
+		  //mongodb query
+		  .find(
+		  	{'uw_id':parseInt(req.params.student_id)},
+		  	{_id:0}
+		  ).toArray(function(err,doc){
+		    	if(err)throw err;
+
+		    	res.json(doc[0]);
+		    });  
 		});
-		//console.log("outside: " + tools.getCourseList(req.params.student_id));
-		//var studentPlan;
 	});
 
 
