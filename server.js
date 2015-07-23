@@ -175,26 +175,26 @@ router.route('/enroll/shortlistDelete/:student_id/:course')
 			if (err) {
 				return console.dir(err);
 			}
-			var course = req.params.course;
+			var course = req.params.course.toUpperCase();
 			var student_id = req.params.student_id;
 
-			db.collection('studentshortlist').find({'uw_id':parseInt(student_id)})
+			db.collection('mockdata').find({'uw_id':parseInt(student_id)})
 			.toArray(function(err,doc){
 		    	if(err)throw err;
 
-		    	var courseList = doc[0].courses;
+		    	var shortlist = doc[0].Shortlist;
 
-		    	for (var i = 0; i < courseList.length; i++) {
-		    		if(courseList[i] == course){
-		    			courseList.splice(i,1);
+		    	for (var i = 0; i < shortlist.length; i++) {
+		    		if(shortlist[i].Course == course){
+		    			shortlist.splice(i,1);
 		    		}
 		    	};
 
-		    	db.collection('studentshortlist').update({'uw_id':parseInt(student_id)}, {$set:{courses:courseList}},
+		    	db.collection('mockdata').update({'uw_id':parseInt(student_id)}, {$set:{Shortlist:shortlist}},
 		    		function(err, result) {
 					    if (err)throw err;
-
-		    			res.json("Success");
+							doc[0].Shortlist = shortlist;
+		    			res.json(doc[0]);
 
 					});
 		    });
