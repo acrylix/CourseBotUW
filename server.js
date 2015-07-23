@@ -148,7 +148,7 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 		})
 	})
 
-router.route('/enroll/mockdata')
+router.route('/enroll/mockdata/:student_id')
 	.get(function(req, res) {
 		MongoClient.connect(config.mongo.connect, function(err, db) {
 		  if(err) {
@@ -159,7 +159,7 @@ router.route('/enroll/mockdata')
 		  db.collection('mockdata')
 		  //mongodb query
 		  .find(
-		  	{'uw_id':1009},
+		  	{'uw_id':parseInt(req.params.student_id)},
 		  	{_id:0}
 		  ).toArray(function(err,doc){
 		    	if(err)throw err;
