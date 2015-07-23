@@ -79,6 +79,7 @@ function processShortlist(shortlist, returnCallback) {
 		        	tempItem.section = body.data[i].section;
 		        	tempItem.enrollment_capacity = body.data[i].enrollment_capacity;
 		        	tempItem.enrollment_total = body.data[i].enrollment_total;
+		        	tempItem.title = body.data[i].title;
 		        	tempItem.classes = body.data[i].classes;
 
 		        	classList.push(tempItem);

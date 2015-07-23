@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 // ROUTES FOR OUR API
 // =============================================================================
-var router = express.Router();
+var router = express.Router();              
 
 router.use(function(req,res,next){
 	console.log("API Call");
@@ -49,11 +49,11 @@ router.route('/checklist/:student_id')
 // ================================================
 
 // has no arguments, courses passed in through POST body
-router.route('/enroll/shortlistGet/:student_id')///////////////////NOT DOIN RIGHT SHIT
-    .post(function(req, res) {
+router.route('/enroll/shortlistGet/:student_id')///////////////////NOT DOIN RIGHT SHIT 
+    .get(function(req, res) {
         MongoClient.connect(config.mongo.connect, function(err, db) {
-		  if(err) {
-		  	return console.dir(err);
+		  if(err) { 
+		  	return console.dir(err); 
 		  }
 		  console.log("------------------")
 		  console.log("Fetching for uw_id:"+req.params.student_id);
@@ -69,14 +69,14 @@ router.route('/enroll/shortlistGet/:student_id')///////////////////NOT DOIN RIGH
 		    	if(err)throw err;
 
 		    	res.json(doc);
-		    });
+		    });  
 		});
 
-        // var shortlist = req.body.course;
-
+        // var shortlist = req.body.course;  
+        
         // enrollmentmodule.processShortlist(shortlist, function(result){
 	       // res.json(result);
-        // });
+        // });        
     });
 
 router.route('/enroll/shortlistAdd/:student_id/:course')
@@ -88,60 +88,31 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 			var course = req.params.course;
 			var student_id = req.params.student_id;
 
-			db.collection('mockdata').find({'uw_id':parseInt(student_id)})
+			db.collection('studentshortlist').find({'uw_id':parseInt(student_id)})
 			.toArray(function(err,doc){
 		    	if(err)throw err;
 
-					var obj = enrollmentmodule.getCourseInfo(course, doc[0], function(classes, fulldoc){
+		    	var courseList = doc[0].courses;
+		    	courseList.push(course);
 
-						var classObj = new Object();
-						classObj.Course = course;
-						classObj.Sections = [];
+		    	db.collection('studentshortlist').update({'uw_id':parseInt(student_id)}, {$set:{courses:courseList}}, 
+		    		function(err, result) {
+				    if (err)throw err;
 
-						var totalCap=0;
-						var curCap=0;
-						for (var i = 0; i < classes.length; i++) {
-
-							var lecObj = new Object();
-							lecObj.name = classes[i].section;
-							lecObj.capacity = classes[i].enrollment_total+"/"+classes[i].enrollment_capacity;
-							totalCap+=classes[i].enrollment_capacity;
-							curCap+=classes[i].enrollment_total;
-
-							classObj.Sections.push(lecObj);
-						}
-
-						classObj.Capacity = curCap+"/"+totalCap;
-
-						fulldoc.Shortlist.push(classObj);
-
-						res.json(fulldoc);
-						//
-
-
-					})
-
-		    // 	var courseList = doc[0].courses;
-		    // 	courseList.push(course);
-				//
-		    // 	db.collection('studentshortlist').update({'uw_id':parseInt(student_id)}, {$set:{courses:courseList}},
-		    // 		function(err, result) {
-				//     if (err)throw err;
-				//
-	    	// 		res.json("Success");
-				//
-				// });
-		    });
+	    			res.json("Success");
+				    
+				});
+		    });  
 		})
 	})
 
 router.route('/enroll/mockdata')
 	.get(function(req, res) {
 		MongoClient.connect(config.mongo.connect, function(err, db) {
-		  if(err) {
-		  	return console.dir(err);
+		  if(err) { 
+		  	return console.dir(err); 
 		  }
-
+		  
 
 		  db.collection('mockdata')
 		  //mongodb query
@@ -152,7 +123,7 @@ router.route('/enroll/mockdata')
 		    	if(err)throw err;
 
 		    	res.json(doc[0]);
-		    });
+		    });  
 		});
 	})
 
@@ -177,14 +148,14 @@ router.route('/enroll/shortlistDelete/:student_id/:course')
 		    		}
 		    	};
 
-		    	db.collection('studentshortlist').update({'uw_id':parseInt(student_id)}, {$set:{courses:courseList}},
+		    	db.collection('studentshortlist').update({'uw_id':parseInt(student_id)}, {$set:{courses:courseList}}, 
 		    		function(err, result) {
 					    if (err)throw err;
 
 		    			res.json("Success");
-
+					    
 					});
-		    });
+		    });  
 		})
 	})
 // ================================================
@@ -212,10 +183,10 @@ router.route('/scrapeEng/:plan')
 router.route('/test/:student_id')
 	.get(function(req, res) {
 		MongoClient.connect(config.mongo.connect, function(err, db) {
-		  if(err) {
-		  	return console.dir(err);
+		  if(err) { 
+		  	return console.dir(err); 
 		  }
-
+		  
 
 		  db.collection('studentsmock')
 		  //mongodb query
@@ -226,7 +197,7 @@ router.route('/test/:student_id')
 		    	if(err)throw err;
 
 		    	res.json(doc[0]);
-		    });
+		    });  
 		});
 	});
 
@@ -241,8 +212,8 @@ router.route('/test/:student_id')
 // 	.get(function(req,res){
 
 // 		MongoClient.connect(config.mongo.connect, function(err, db) {
-// 		  if(err) {
-// 		  	return console.dir(err);
+// 		  if(err) { 
+// 		  	return console.dir(err); 
 // 		  }
 // 		  console.log("------------------")
 // 		  console.log("Fetching for uw_id:"+req.params.student_id);
@@ -268,7 +239,7 @@ router.route('/test/:student_id')
 // 		    	if(err)throw err;
 
 // 		    	res.json(doc);
-// 		    });
+// 		    });  
 // 		});
 // 	});
 //
@@ -305,4 +276,4 @@ console.log('happens on ' + config.web.port);
 //db.students.findOne({uw_id:1009,subject_code:'CS',catalog: /^3.*/,'details.units_attempted':{$ne: 0}})
 
 //some mongo import commands
-//mongoimport -h ds041432.mongolab.com:41432 -d cs446 -c studentsmock -u michael -p admin --file <input file> --jsonArray
+//mongoimport -h ds041432.mongolab.com:41432 -d cs446 -c students -u michael -p admin --file <input file> --jsonArray
