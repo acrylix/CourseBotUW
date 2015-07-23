@@ -46,6 +46,7 @@ function findRangeConstraint(constraint, course_list){
   	var constraint_range = constraint_catalog.split('-').map(Number);
 
   	for (var i = 0; i < course_list.length; i++) {
+  		console.log(course_list[i]);
   		var course_subject_code = course_list[i].slice(0,course_list[i].indexOf(course_list[i].match(/\d/)));
   		var course_catalog = parseInt(course_list[i].slice(course_list[i].indexOf(course_list[i].match(/\d/)),course_list[i].length));
   		if(course_subject_code == constraint_subject_code && course_catalog >= constraint_range[0] && course_catalog <= constraint_range[1]){
@@ -394,7 +395,7 @@ function getCheckList(plan, callback){
 	MongoClient.connect(config.mongo.connect, function(err, db) {
 		if (err) {return console.dir(err);}
 
-		db.collection('plans')
+		db.collection('template')
 		.find({
 			plan:'CSBHC'
 		})

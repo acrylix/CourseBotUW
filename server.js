@@ -50,7 +50,7 @@ router.route('/checklist/:student_id')
 
 // has no arguments, courses passed in through POST body
 router.route('/enroll/shortlistGet/:student_id')///////////////////NOT DOIN RIGHT SHIT
-    .post(function(req, res) {
+    .get(function(req, res) {
         MongoClient.connect(config.mongo.connect, function(err, db) {
 		  if(err) {
 		  	return console.dir(err);
@@ -60,7 +60,7 @@ router.route('/enroll/shortlistGet/:student_id')///////////////////NOT DOIN RIGH
 		  console.log("Visiting from IP:"+req.connection.remoteAddress);
 		  console.log("------------------")
 
-		  db.collection('StudentShortlist')
+		  db.collection('mockdata')
 		  //mongodb query
 		  .find(
 		  	{'uw_id':parseInt(req.params.student_id)},
@@ -85,57 +85,70 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 			if (err) {
 				return console.dir(err);
 			}
-			var course = req.params.course;
+			var course = req.params.course.toUpperCase();
 			var student_id = req.params.student_id;
 
 			db.collection('mockdata').find({'uw_id':parseInt(student_id)})
 			.toArray(function(err,doc){
 		    	if(err)throw err;
 
-					var obj = enrollmentmodule.getCourseInfo(course, doc[0], function(classes, fulldoc){
+					for (var i = 0; i < doc[0].Shortlist.length; i++) {
+						if(doc[0].Shortlist[i].Course == course){
 
-						var classObj = new Object();
-						classObj.Course = course;
-						classObj.Sections = [];
-
-						var totalCap=0;
-						var curCap=0;
-						for (var i = 0; i < classes.length; i++) {
-
-							var lecObj = new Object();
-							lecObj.name = classes[i].section;
-							lecObj.capacity = classes[i].enrollment_total+"/"+classes[i].enrollment_capacity;
-							totalCap+=classes[i].enrollment_capacity;
-							curCap+=classes[i].enrollment_total;
-
-							classObj.Sections.push(lecObj);
+							res.json({"err":"Already shortlisted " + doc[0].Shortlist[i].Course});
+							return;
 						}
+					}
 
-						classObj.Capacity = curCap+"/"+totalCap;
+					for (var i = 0; i < doc[0].Enrolled.length; i++) {
+						if(doc[0].Enrolled[i].Course == course){
+							res.json({"err":"Already enrolled in " + doc[0].Enrolled[i].Course});
+							return;
+						}
+					}
 
-						fulldoc.Shortlist.push(classObj);
+						var obj = enrollmentmodule.getCourseInfo(course, doc[0], function(classes, fulldoc){
 
-						res.json(fulldoc);
-						//
+							if(classes.length == 0){
+								res.json({"err": course + " is not offered this term"});
+								return;
+							}
 
+							var classObj = new Object();
+							classObj.Course = classes[0].subject+classes[0].catalog_number;
+							classObj.Title = classes[0].title;
+							classObj.Sections = [];
 
-					})
+							var totalCap=0;
+							var curCap=0;
+							for (var i = 0; i < classes.length; i++) {
 
-		    // 	var courseList = doc[0].courses;
-		    // 	courseList.push(course);
-				//
-		    // 	db.collection('studentshortlist').update({'uw_id':parseInt(student_id)}, {$set:{courses:courseList}},
-		    // 		function(err, result) {
-				//     if (err)throw err;
-				//
-	    	// 		res.json("Success");
-				//
-				// });
+								var lecObj = new Object();
+								lecObj.Name = classes[i].section;
+								lecObj.Capacity = classes[i].enrollment_total+"/"+classes[i].enrollment_capacity;
+								totalCap+=classes[i].enrollment_capacity;
+								curCap+=classes[i].enrollment_total;
+
+								classObj.Sections.push(lecObj);
+							}
+
+							classObj.Capacity = curCap+"/"+totalCap;
+
+							fulldoc.Shortlist.push(classObj);
+
+							db.collection('mockdata').update({'uw_id':parseInt(student_id)}, {$set:{Shortlist:fulldoc.Shortlist}},
+					    		function(err, result) {
+							    if (err)throw err;
+
+				    			res.json(fulldoc);
+
+							});
+						})
 		    });
 		})
 	})
 
-router.route('/enroll/mockdata')
+router.route('/enroll/mockdata/:student_id')
 	.get(function(req, res) {
 		MongoClient.connect(config.mongo.connect, function(err, db) {
 		  if(err) {
@@ -146,7 +159,7 @@ router.route('/enroll/mockdata')
 		  db.collection('mockdata')
 		  //mongodb query
 		  .find(
-		  	{'uw_id':1009},
+		  	{'uw_id':parseInt(req.params.student_id)},
 		  	{_id:0}
 		  ).toArray(function(err,doc){
 		    	if(err)throw err;
@@ -162,26 +175,26 @@ router.route('/enroll/shortlistDelete/:student_id/:course')
 			if (err) {
 				return console.dir(err);
 			}
-			var course = req.params.course;
+			var course = req.params.course.toUpperCase();
 			var student_id = req.params.student_id;
 
-			db.collection('studentshortlist').find({'uw_id':parseInt(student_id)})
+			db.collection('mockdata').find({'uw_id':parseInt(student_id)})
 			.toArray(function(err,doc){
 		    	if(err)throw err;
 
-		    	var courseList = doc[0].courses;
+		    	var shortlist = doc[0].Shortlist;
 
-		    	for (var i = 0; i < courseList.length; i++) {
-		    		if(courseList[i] == course){
-		    			courseList.splice(i,1);
+		    	for (var i = 0; i < shortlist.length; i++) {
+		    		if(shortlist[i].Course == course){
+		    			shortlist.splice(i,1);
 		    		}
 		    	};
 
-		    	db.collection('studentshortlist').update({'uw_id':parseInt(student_id)}, {$set:{courses:courseList}},
+		    	db.collection('mockdata').update({'uw_id':parseInt(student_id)}, {$set:{Shortlist:shortlist}},
 		    		function(err, result) {
 					    if (err)throw err;
-
-		    			res.json("Success");
+							doc[0].Shortlist = shortlist;
+		    			res.json(doc[0]);
 
 					});
 		    });
@@ -305,4 +318,4 @@ console.log('happens on ' + config.web.port);
 //db.students.findOne({uw_id:1009,subject_code:'CS',catalog: /^3.*/,'details.units_attempted':{$ne: 0}})
 
 //some mongo import commands
-//mongoimport -h ds041432.mongolab.com:41432 -d cs446 -c studentsmock -u michael -p admin --file <input file> --jsonArray
+//mongoimport -h ds041432.mongolab.com:41432 -d cs446 -c students -u michael -p admin --file <input file> --jsonArray
