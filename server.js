@@ -108,7 +108,7 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 							}
 
 							var classObj = new Object();
-							classObj.Course = course;
+							classObj.Course = classes[0].subject+classes[0].catalog_number;
 							classObj.Title = classes[0].title;
 							classObj.Sections = [];
 
