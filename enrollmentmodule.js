@@ -36,6 +36,7 @@ function getCourseInfo(course, fulldoc, callback) {
 						tempItem.catalog_number = body.data[i].catalog_number;
 						tempItem.class_number = body.data[i].class_number;
 						tempItem.section = body.data[i].section;
+						tempItem.title = body.data[i].title;
 						tempItem.enrollment_capacity = body.data[i].enrollment_capacity;
 						tempItem.enrollment_total = body.data[i].enrollment_total;
 						tempItem.classes = body.data[i].classes;

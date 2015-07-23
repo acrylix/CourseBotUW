@@ -60,7 +60,7 @@ router.route('/enroll/shortlistGet/:student_id')///////////////////NOT DOIN RIGH
 		  console.log("Visiting from IP:"+req.connection.remoteAddress);
 		  console.log("------------------")
 
-		  db.collection('StudentShortlist')
+		  db.collection('mockdata')
 		  //mongodb query
 		  .find(
 		  	{'uw_id':parseInt(req.params.student_id)},
@@ -92,37 +92,52 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 			.toArray(function(err,doc){
 		    	if(err)throw err;
 
-					var obj = enrollmentmodule.getCourseInfo(course, doc[0], function(classes, fulldoc){
+					for (var i = 0; i < doc[0].Shortlist.length; i++) {
+						if(doc[0].Shortlist[i].Course == course){
 
-						var classObj = new Object();
-						classObj.Course = course;
-						classObj.Sections = [];
-
-						var totalCap=0;
-						var curCap=0;
-						for (var i = 0; i < classes.length; i++) {
-
-							var lecObj = new Object();
-							lecObj.name = classes[i].section;
-							lecObj.capacity = classes[i].enrollment_total+"/"+classes[i].enrollment_capacity;
-							totalCap+=classes[i].enrollment_capacity;
-							curCap+=classes[i].enrollment_total;
-
-							classObj.Sections.push(lecObj);
+							res.json("duplicate");
+							return;
 						}
+					}
 
-						classObj.Capacity = curCap+"/"+totalCap;
+						var obj = enrollmentmodule.getCourseInfo(course, doc[0], function(classes, fulldoc){
 
-						fulldoc.Shortlist.push(classObj);
+							if(classes.length == 0){
+								res.json("not offered");
+								return;
+							}
 
-						db.collection('mockdata').update({'uw_id':parseInt(student_id)}, {$set:{Shortlist:fulldoc.Shortlist}},
-				    		function(err, result) {
-						    if (err)throw err;
+							var classObj = new Object();
+							classObj.Course = course;
+							classObj.title = classes[0].title;
+							classObj.Sections = [];
 
-			    			res.json(fulldoc);
+							var totalCap=0;
+							var curCap=0;
+							for (var i = 0; i < classes.length; i++) {
 
-						});
-					})
+								var lecObj = new Object();
+								lecObj.name = classes[i].section;
+								lecObj.capacity = classes[i].enrollment_total+"/"+classes[i].enrollment_capacity;
+								totalCap+=classes[i].enrollment_capacity;
+								curCap+=classes[i].enrollment_total;
+
+								classObj.Sections.push(lecObj);
+							}
+
+							classObj.Capacity = curCap+"/"+totalCap;
+
+							fulldoc.Shortlist.push(classObj);
+
+							db.collection('mockdata').update({'uw_id':parseInt(student_id)}, {$set:{Shortlist:fulldoc.Shortlist}},
+					    		function(err, result) {
+							    if (err)throw err;
+
+				    			res.json(fulldoc);
+
+							});
+						})
+
 
 		    // 	var courseList = doc[0].courses;
 		    // 	courseList.push(course);
