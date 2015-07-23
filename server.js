@@ -50,7 +50,7 @@ router.route('/checklist/:student_id')
 
 // has no arguments, courses passed in through POST body
 router.route('/enroll/shortlistGet/:student_id')///////////////////NOT DOIN RIGHT SHIT
-    .post(function(req, res) {
+    .get(function(req, res) {
         MongoClient.connect(config.mongo.connect, function(err, db) {
 		  if(err) {
 		  	return console.dir(err);
@@ -88,7 +88,7 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 			var course = req.params.course;
 			var student_id = req.params.student_id;
 
-			db.collection('mockdata').find({'uw_id':parseInt(student_id)})
+			db.collection('studentshortlist').find({'uw_id':parseInt(student_id)})
 			.toArray(function(err,doc){
 		    	if(err)throw err;
 
@@ -99,6 +99,13 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 							return;
 						}
 					}
+
+		    	var courseList = doc[0].courses;
+		    	courseList.push(course);
+
+		    	db.collection('studentshortlist').update({'uw_id':parseInt(student_id)}, {$set:{courses:courseList}},
+		    		function(err, result) {
+				    if (err)throw err;
 
 						var obj = enrollmentmodule.getCourseInfo(course, doc[0], function(classes, fulldoc){
 
@@ -139,16 +146,9 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 						})
 
 
-		    // 	var courseList = doc[0].courses;
-		    // 	courseList.push(course);
-				//
-		    // 	db.collection('studentshortlist').update({'uw_id':parseInt(student_id)}, {$set:{courses:courseList}},
-		    // 		function(err, result) {
-				//     if (err)throw err;
-				//
-	    	// 		res.json("Success");
-				//
-				// });
+	    			res.json("Success");
+
+				});
 		    });
 		})
 	})
@@ -323,4 +323,4 @@ console.log('happens on ' + config.web.port);
 //db.students.findOne({uw_id:1009,subject_code:'CS',catalog: /^3.*/,'details.units_attempted':{$ne: 0}})
 
 //some mongo import commands
-//mongoimport -h ds041432.mongolab.com:41432 -d cs446 -c studentsmock -u michael -p admin --file <input file> --jsonArray
+//mongoimport -h ds041432.mongolab.com:41432 -d cs446 -c students -u michael -p admin --file <input file> --jsonArray

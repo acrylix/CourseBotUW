@@ -3,6 +3,7 @@
 	"Shortlist" : [
 		{
 			"Course": "CS466",
+			"Title": "Algorithm Design and Analysis",
 			"Capacity": "58/60",
 			"Sections": [
 				{
@@ -13,6 +14,7 @@
 		},
 		{
 			"Course": "CS475",
+			"Title": "Computational Linear Algebra",
 			"Capacity": "28/40",
 			"Sections": [
 				{
@@ -23,6 +25,7 @@
 		},
 		{
 			"Course": "CS482",
+			"Title": "Computational Techniques in Biological Sequence Analysis",
 			"Capacity": "7/20",
 			"Sections": [
 				{
@@ -36,6 +39,7 @@
 	"Enrolled" : [
 		{
 			"Course": "CS446",
+			"Title": "Software Design and Architectures",
 			"Capacity": "88/100",
 			"Sections": [
 				{
@@ -51,6 +55,7 @@
 		},
 		{
 			"Course": "CS490",
+			"Title": "Information Systems Management",
 			"Capacity": "49/50",
 			"Sections": [
 				{
@@ -61,6 +66,7 @@
 		},
 		{
 			"Course": "MUSIC140",
+			"Title": "Popular Music and Culture",
 			"Capacity": "193/200",
 			"Sections": [
 				{
@@ -71,6 +77,7 @@
 		},
 		{
 			"Course": "ECON220",
+			"Title": "The Principles of Entrepreneurship",
 			"Capacity": "67/100",
 			"Sections": [
 				{
@@ -80,7 +87,8 @@
 			]
 		},
 		{
-			"Course": "ECON220",
+			"Course": "HRM200",
+			"Title": "Basic Human Resources Management",
 			"Capacity": "564/597",
 			"Sections": [
 				{
