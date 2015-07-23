@@ -88,7 +88,7 @@ router.route('/enroll/shortlistAdd/:student_id/:course')
 			var course = req.params.course;
 			var student_id = req.params.student_id;
 
-			db.collection('studentshortlist').find({'uw_id':parseInt(student_id)})
+			db.collection('mockdata').find({'uw_id':parseInt(student_id)})
 			.toArray(function(err,doc){
 		    	if(err)throw err;
 
