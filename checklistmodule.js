@@ -190,36 +190,6 @@ function findQualifyingCourses(constraints, course_list)
     return qualify
 }
 
-function eliminateQualifiers(qualifyToReq) 
-{
-	qualifyToReq.sort(function(a, b) {
-		if(a.qualify.length > b.qualify.length) return 1
-		if(a.qualify.length < b.qualify.length) return -1
-		return 0
-	})
-
-	var p = qualifyToReq[0]
-	if(p.qualify.length == 1) {
-		var course = p.qualify[0]
-		// console.log(course + ' ' + p)
-		p.req['Selected'] = course
-		qualifyToReq.splice(0, 1)
-		for(var i = 0; i < qualifyToReq.length; i++) 
-		{
-			var q = qualifyToReq[i]
-			// console.log(q)
-			var index = q.qualify.indexOf(course)
-			if(index >= 0) q.qualify.splice(index, 1)
-		}
-	} else {
-		console.log(qualifyToReq)
-		return
-	}
-
-	eliminateQualifiers(qualifyToReq)
-
-}
-
 function solved(qualifyToReq)
 {
 	var ret = true
@@ -239,7 +209,6 @@ function newData(data, index, v)
 {
 	var qualifyToReq = data.qualifyToReq
 	var newQ = []
-	// console.log(v)
 
 	for(var i = 0; i < qualifyToReq.length; i++)
 	{
@@ -256,7 +225,6 @@ function newData(data, index, v)
 			{
 				var ind = n.qualify.indexOf(v)
 				if(ind >= 0) n.qualify.splice(ind, 1)
-				if(n.qualify.length < 1 && data.courses.length != 1) return null
 			}
 		}
 		newQ.push(n)
@@ -289,7 +257,7 @@ function leastConstraining(qualifyToReq, domain)
 }
 
 function bts(data)
-{	
+{
 	if(data.courses.length == 0) return data
 	var qualifyToReq = data.qualifyToReq
 
@@ -299,7 +267,7 @@ function bts(data)
 	for(var i = 0; i < qualifyToReq.length; i++)
 	{
 		if(typeof qualifyToReq[i].qualify !== 'string') {
-			if(qualifyToReq[i].qualify.length < max) {
+			if(qualifyToReq[i].qualify.length > 0 && qualifyToReq[i].qualify.length < max) {
 				index = i
 				max = qualifyToReq[i].qualify.length
 			}
@@ -307,10 +275,12 @@ function bts(data)
 	}
 
 	var p = qualifyToReq[index]
+	
 	var domain = p.qualify.slice() // clones array
 	while(domain.length > 0)
 	{
 		var v = leastConstraining(qualifyToReq, domain)
+		
 		var newD = newData(data, index, v)
 		if(newD != null) 
 		{
@@ -335,7 +305,7 @@ function processRequiredCourses(template, course_list)
 		for(var j = 0; j < reqs.length; j++) 
 		{
 			qualifiedCourses = findQualifyingCourses(reqs[j]['Constraints'], course_list)
-			qualifyToReq.push({'qualify': (qualifiedCourses.length == 0 ? '' : qualifiedCourses), 'req': reqs[j], 'course_list': course_list})
+			qualifyToReq.push({'qualify': (qualifiedCourses.length == 0 ? '' : qualifiedCourses), 'req': reqs[j]})
 		}
 	}
 
@@ -347,12 +317,16 @@ function processRequiredCourses(template, course_list)
 	}
 
 	var data = {'qualifyToReq': qualifyToReq, 'courses': courses}
-	ans = bts(data)	
 	
+	ans = bts(data)	
+	if(ans == null) return
 	for(var i = 0; i < ans.qualifyToReq.length; i++)
 	{	
 		var p = ans.qualifyToReq[i];
-		if(typeof p.qualify === 'string') p.req['Selected'] = p.qualify
+		if(typeof p.qualify === 'string') {
+			p.req['Selected'] = p.qualify
+			p.req['Name'] = p.req['Name'] + ': ' + p.qualify
+		}
 	}
 }
 
