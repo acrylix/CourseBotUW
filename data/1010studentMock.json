@@ -1,5 +1,6 @@
 {
-  "uw_id": 1009,
+  "_id": "55ac3e9cef8c38d60d58ffa5",
+  "uw_id": 1010,
   "plan": "CSBHC",
   "Required Courses": {
     "Required": 4,
@@ -80,24 +81,31 @@
               "CS340-398",
               "CS440-489"
             ],
-            "Selected": "CS348",
-            "Name": "CS 340-398, 440-489: CS348"
+            "Selected": "CS349",
+            "Name": "CS 340-398, 440-489: CS349"
           },
           {
-            "Selected": "CS349",
-            "Name": "CS 340-398, 440-489: CS349",
+            "Selected": "CS370",
+            "Name": "CS 340-398, 440-489: CS370",
             "Constraints": [
               "CS340-398",
               "CS440-489"
             ]
           },
           {
-            "Name": "CS 340-398, 440-489: CS360",
+            "Name": "CS 340-398, 440-489: CS348",
             "Constraints": [
               "CS340-398",
               "CS440-489"
             ],
-            "Selected": "CS360"
+            "Selected": "CS348"
+          },
+          {
+            "Name": "CS 440-489: CS449",
+            "Constraints": [
+              "CS440-489"
+            ],
+            "Selected": "CS449"
           },
           {
             "Name": "CS 440-489: CS458",
@@ -107,14 +115,7 @@
             "Selected": "CS458"
           },
           {
-            "Name": "CS 440-489: CS486",
-            "Constraints": [
-              "CS440-489"
-            ],
-            "Selected": "CS486"
-          },
-          {
-            "Name": "CS 440-498 or CS 499T or CS 6XX or CS 7XX or STAT 440 or CO 487",
+            "Name": "CS 440-498 or CS 499T or CS 6XX or CS 7XX or STAT 440 or CO 487: CS456",
             "Constraints": [
               "CS440-489",
               "CS449T",
@@ -123,7 +124,7 @@
               "STAT440",
               "CO487"
             ],
-            "Selected": null
+            "Selected": "CS456"
           }
         ]
       },
@@ -201,67 +202,67 @@
             "Selected": "ECON101"
           },
           {
-            "Name": "2: FR192A",
+            "Name": "2: PHYS111",
             "Constraints": [
               "NONMATH"
             ],
-            "Selected": "FR192A"
+            "Selected": "PHYS111"
           },
           {
-            "Name": "3: FR192B",
+            "Name": "3: CHEM120",
             "Constraints": [
               "NONMATH"
             ],
-            "Selected": "FR192B"
+            "Selected": "CHEM120"
           },
           {
-            "Name": "4: JAPAN101R",
+            "Name": "4: PHYS112",
             "Constraints": [
               "NONMATH"
             ],
-            "Selected": "JAPAN101R"
+            "Selected": "PHYS112"
           },
           {
-            "Name": "5: JAPAN102R",
+            "Name": "5: ECON102",
             "Constraints": [
               "NONMATH"
             ],
-            "Selected": "JAPAN102R"
+            "Selected": "ECON102"
           },
           {
-            "Name": "6: SPAN101",
+            "Name": "6: ECON202",
             "Constraints": [
               "NONMATH"
             ],
-            "Selected": "SPAN101"
+            "Selected": "ECON202"
           },
           {
-            "Name": "7: JAPAN201R",
+            "Name": "7: ENGL109",
             "Constraints": [
               "NONMATH"
             ],
-            "Selected": "JAPAN201R"
+            "Selected": "ENGL109"
           },
           {
-            "Name": "8: JAPAN202R",
+            "Name": "8: ENGL210F",
             "Constraints": [
               "NONMATH"
             ],
-            "Selected": "JAPAN202R"
+            "Selected": "ENGL210F"
           },
           {
-            "Name": "9: RS100",
+            "Name": "9: PHYS256",
             "Constraints": [
               "NONMATH"
             ],
-            "Selected": "RS100"
+            "Selected": "PHYS256"
           },
           {
-            "Name": "10: EASIA201R",
+            "Name": "10: WS101",
             "Constraints": [
               "NONMATH"
             ],
-            "Selected": "EASIA201R"
+            "Selected": "WS101"
           }
         ],
         "Name": "5.0 Non-math Units",
@@ -272,50 +273,50 @@
         "Required": 8,
         "Requirements": [
           {
-            "Name": "1: GEOG215",
+            "Name": "1: MATH235",
             "Constraints": [
               "ELECTIVE"
             ],
-            "Selected": "GEOG215"
+            "Selected": "MATH235"
           },
           {
-            "Name": "2: MUSIC275",
+            "Name": "2: MATH237",
             "Constraints": [
               "ELECTIVE"
             ],
-            "Selected": "MUSIC275"
+            "Selected": "MATH237"
           },
           {
             "Constraints": [
               "ELECTIVE"
             ],
-            "Selected": "KOREA101R",
-            "Name": "3: KOREA101R"
+            "Selected": "CS486",
+            "Name": "3: CS486"
           },
           {
-            "Selected": "RS121",
-            "Name": "4: RS121",
+            "Selected": null,
+            "Name": "4",
             "Constraints": [
               "ELECTIVE"
             ]
           },
           {
-            "Name": "5: CS370",
+            "Name": "5",
             "Constraints": [
               "ELECTIVE"
             ],
-            "Selected": "CS370"
+            "Selected": null
           },
           {
             "Constraints": [
               "ELECTIVE"
             ],
-            "Selected": "FINE130",
-            "Name": "6: FINE130"
+            "Selected": null,
+            "Name": "6"
           },
           {
-            "Selected": "PSYCH101",
-            "Name": "7: PSYCH101",
+            "Selected": null,
+            "Name": "7",
             "Constraints": [
               "ELECTIVE"
             ]
@@ -352,7 +353,7 @@
               "CS456",
               "CS457"
             ],
-            "Selected": null
+            "Selected": "CS456"
           },
           {
             "Name": "One of CS 348, 448, 482, 483, 486, 488",
@@ -364,7 +365,7 @@
               "CS486",
               "CS488"
             ],
-            "Selected": "CS 348"
+            "Selected": "CS348"
           },
           {
             "Name": "One of CS 360, 365, 370, 371, 462, 466, 475, 476, 487",
@@ -379,7 +380,7 @@
               "CS476",
               "CS487"
             ],
-            "Selected": "CS 360"
+            "Selected": "CS370"
           }
         ]
       },
@@ -392,7 +393,7 @@
             "Constraints": [
               "MINOR"
             ],
-            "Selected": "true"
+            "Selected": null
           },
           {
             "Name": "Elective breadth and depth requirements",
@@ -407,18 +408,18 @@
                     "Required": 2,
                     "Requirements": [
                       {
-                        "Name": "1: RS100",
+                        "Name": "1: WS101",
                         "Constraints": [
                           "HUMANITIES"
                         ],
-                        "Selected": "RS100"
+                        "Selected": "WS101"
                       },
                       {
-                        "Name": "2: RS121",
+                        "Name": "2: ENGL109",
                         "Constraints": [
                           "HUMANITIES"
                         ],
-                        "Selected": "RS121"
+                        "Selected": "ENGL109"
                       }
                     ]
                   },
@@ -427,18 +428,18 @@
                     "Required": 2,
                     "Requirements": [
                       {
-                        "Name": "1: PSYCH101",
+                        "Name": "1: ECON101",
                         "Constraints": [
                           "SOCIALSCIENCE"
                         ],
-                        "Selected": "PSYCH101"
+                        "Selected": "ECON101"
                       },
                       {
-                        "Name": "2",
+                        "Name": "2: ECON102",
                         "Constraints": [
                           "SOCIALSCIENCE"
                         ],
-                        "Selected": null
+                        "Selected": "ECON102"
                       }
                     ]
                   },
@@ -447,11 +448,11 @@
                     "Required": 1,
                     "Requirements": [
                       {
-                        "Name": "1",
+                        "Name": "1: PHSY111",
                         "Constraints": [
                           "PURESCIENCE"
                         ],
-                        "Selected": null
+                        "Selected": "PHYS111"
                       }
                     ]
                   },
@@ -460,11 +461,11 @@
                     "Required": 1,
                     "Requirements": [
                       {
-                        "Name": "1",
+                        "Name": "1: PHSY112",
                         "Constraints": [
                           "APPLIEDSCIENCE"
                         ],
-                        "Selected": null
+                        "Selected": "PHYS112"
                       }
                     ]
                   }
