@@ -1,0 +1,51 @@
+{
+    "_id": {
+        "$oid": "55b14662e4b03e734e9124bd"
+    },
+    "uw_id": 1009,
+    "Shortlist": [
+        {
+            "Course": "CS350",
+            "Title": "Operating Systems",
+            "Sections": [
+                {
+                    "Name": "LEC 001",
+                    "Capacity": "70/70"
+                },
+                {
+                    "Name": "LEC 002",
+                    "Capacity": "69/70"
+                },
+                {
+                    "Name": "TST 101",
+                    "Capacity": "139/140"
+                }
+            ],
+            "Capacity": "278/280"
+        }
+    ],
+    "Enrolled": [
+        {
+            "Course": "CS446",
+            "Title": "Software Design and Architectures",
+            "Capacity": "39/50",
+            "Sections": [
+                {
+                    "Name": "LEC 001",
+                    "Capacity": "39/50"
+                }
+            ]
+        },
+        {
+            "Course": "EASIA375R",
+            "Title": "Special Topics in East Asian Studies",
+            "Capacity": "1/1",
+            "Sections": [
+                {
+                    "Name": "LEC 001",
+                    "Capacity": "1/1"
+                }
+            ]
+        }
+    ]
+}

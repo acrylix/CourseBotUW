@@ -1,0 +1,44 @@
+{
+    "_id": {
+        "$oid": "55b15b03e4b03e734e91272a"
+    },
+    "uw_id": 1010,
+    "Shortlist": [
+        {
+            "Course": "CS350",
+            "Title": "Operating Systems",
+            "Sections": [
+                {
+                    "Name": "LEC 001",
+                    "Capacity": "70/70"
+                },
+                {
+                    "Name": "LEC 002",
+                    "Capacity": "69/70"
+                },
+                {
+                    "Name": "TST 101",
+                    "Capacity": "139/140"
+                }
+            ],
+            "Capacity": "278/280"
+        }
+    ],
+    "Enrolled": [
+        {
+            "Course": "CS446",
+            "Title": "Software Design and Architectures",
+            "Capacity": "88/100",
+            "Sections": [
+                {
+                    "Name": "LEC 001",
+                    "Capacity": "39/50"
+                },
+                {
+                    "Name": "LEC 002",
+                    "Capacity": "49/50"
+                }
+            ]
+        }
+    ]
+}
