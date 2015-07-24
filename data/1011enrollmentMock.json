@@ -1,357 +1,92 @@
 {
-    "_id": "55ac3e9cef8c38d60d58ffa5",
-    "plan": "CSBHC",
-    "uw_id": 1011,
-    "Required Courses": {
-        "Required": 4,
-        "Requirements": [
-            {
-                "Name": "7.5 CS Units",
-                "Required": 0,
-                "Requirements": [
-                    {
-                        "Name": "CS 115, 135, 3XX or 4XX: CS135",
-                        "Selected": "CS135"
-                    },
-                    {
-                        "Name": "CS 136 or 145: CS136",
-                        "Selected": "CS136"
-                    },
-                    {
-                        "Selected": "CS240",
-                        "Name": "CS240: CS240"
-                    },
-                    {
-                        "Name": "CS 241: CS241",
-                        "Selected": "CS241"
-                    },
-                    {
-                        "Selected": "CS245",
-                        "Name": "CS 245: CS245"
-                    },
-                    {
-                        "Name": "CS 246: CS246",
-                        "Selected": "CS246"
-                    },
-                    {
-                        "Name": "CS 251: CS251",
-                        "Selected": "CS251"
-                    },
-                    {
-                        "Name": "CS 341: CS341",
-                        "Selected": "CS341"
-                    },
-                    {
-                        "Name": "CS 350: CS350",
-                        "Selected": "CS350"
-                    },
-                    {
-                        "Selected": "CS348",
-                        "Name": "CS 340-398, 440-489: CS348"
-                    },
-                    {
-                        "Selected": "CS349",
-                        "Name": "CS 340-398, 440-489: CS349"
-                    },
-                    {
-                        "Name": "CS 340-398, 440-489: CS360",
-                        "Selected": "CS360"
-                    },
-                    {
-                        "Name": "CS 440-489: CS456",
-                        "Selected": "CS456"
-                    },
-                    {
-                        "Name": "CS 440-489: CS445",
-                        "Selected": "CS445"
-                    },
-                    {
-                        "Name": "CS 440-498 or CS 499T or CS 6XX or CS 7XX or STAT 440 or CO 487: CS486",
-                        "Selected": "CS486"
-                    }
-                ]
-            },
-            {
-                "Name": "3.5 Math Units",
-                "Required": 0,
-                "Requirements": [
-                    {
-                        "Name": "MATH 1[34]5: MATH135",
-                        "Selected": "MATH135"
-                    },
-                    {
-                        "Name": "MATH 1[34]6: MATH136",
-                        "Selected": "MATH136"
-                    },
-                    {
-                        "Name": "MATH 1[234]7: MATH137",
-                        "Selected": "MATH137"
-                    },
-                    {
-                        "Selected": "MATH138",
-                        "Name": "MATH 1[234]8: MATH138"
-                    },
-                    {
-                        "Selected": "MATH239",
-                        "Name": "MATH 2[34]9: MATH239"
-                    },
-                    {
-                        "Name": "STAT 2[34]0: STAT230",
-                        "Selected": "STAT230"
-                    },
-                    {
-                        "Selected": "STAT231",
-                        "Name": "STAT 2[34]1: STAT231"
-                    }
-                ]
-            },
-            {
-                "Requirements": [
-                    {
-                        "Name": "1: ECON101",
-                        "Selected": "ECON101"
-                    },
-                    {
-                        "Name": "2: PSYCH101",
-                        "Selected": "PSYCH101"
-                    },
-                    {
-                        "Name": "3: ECON102",
-                        "Selected": "ECON102"
-                    },
-                    {
-                        "Name": "4: JAPAN101R",
-                        "Selected": "JAPAN101R"
-                    },
-                    {
-                        "Name": "5: ECON201",
-                        "Selected": "ECON201"
-                    },
-                    {
-                        "Name": "6: PHYS111",
-                        "Selected": "PHYS111"
-                    },
-                    {
-                        "Name": "7: CS245",
-                        "Selected": "CS245"
-                    },
-                    {
-                        "Name": "8: ENGL210F",
-                        "Selected": "ENGL210F"
-                    },
-                    {
-                        "Name": "9: SCI205",
-                        "Selected": "SCI205"
-                    },
-                    {
-                        "Name": "10: SCI206",
-                        "Selected": "SCI206"
-                    }
-                ],
-                "Name": "5.0 Non-math Units",
-                "Required": 0
-            },
-            {
-                "Name": "4.0 Elective Units",
-                "Required": 2,
-                "Requirements": [
-                    {
-                        "Name": "1: MSCI211",
-                        "Selected": "MSCI211"
-                    },
-                    {
-                        "Name": "2: PHYS112",
-                        "Selected": "PHYS112"
-                    },
-                    {
-                        "Selected": "CS492",
-                        "Name": "3: CS492"
-                    },
-                    {
-                        "Selected": "ECON102",
-                        "Name": "4: ECON102"
-                    },
-                    {
-                        "Name": "5: ECON301",
-                        "Selected": "ECON301"
-                    },
-                    {
-                        "Selected": "MUSIC100",
-                        "Name": "6: MUSIC100"
-                    },
-                    {
-                        "Selected": null,
-                        "Name": "7",
-                        "Constraints": [
-                            "ELECTIVE"
-                        ]
-                    },
-                    {
-                        "Name": "8",
-                        "Constraints": [
-                            "ELECTIVE"
-                        ],
-                        "Selected": null
-                    }
-                ]
-            }
-        ]
+    "_id": {
+        "$oid": "55b15ae0e4b03e734e912727"
     },
-    "Additional Constraints": {
-        "Required": 8,
-        "Requirements": [
-            {
-                "Name": "Two of (CS Breadth)",
-                "Required": -1,
-                "Requirements": [
-                    {
-                        "Name": "One of CS 343, 442, 444, 445, 446, 447, 450, 452, 454, 456, 457: CS445",
-                        "Selected": "CS445"
-                    },
-                    {
-                        "Name": "One of CS 348, 448, 482, 483, 486, 488: CS348",
-                        "Selected": "CS348"
-                    },
-                    {
-                        "Name": "One of CS 360, 365, 370, 371, 462, 466, 475, 476, 487: CS360",
-                        "Selected": "CS360"
-                    }
-                ]
-            },
-            {
-                "Name": "Non-math units that satisfy one of: ",
-                "Required": 1,
-                "Requirements": [
-                    {
-                        "Name": "A minor, joint or full Honours plan from outside of the Mathematics Faculty",
-                        "Constraints": [
-                            "MINOR"
-                        ],
-                        "Selected": null
-                    },
-                    {
-                        "Name": "Elective breadth and depth requirements",
-                        "Required": 2,
-                        "Requirements": [
-                            {
-                                "Name": "All of (breadth): ",
-                                "Required": 4,
-                                "Requirements": [
-                                    {
-                                        "Name": "1.0 units from the humanities",
-                                        "Required": 2,
-                                        "Requirements": [
-                                            {
-                                                "Name": "1",
-                                                "Constraints": [
-                                                    "HUMANITIES"
-                                                ],
-                                                "Selected": "PHYSCH101"
-                                            },
-                                            {
-                                                "Name": "2",
-                                                "Constraints": [
-                                                    "HUMANITIES"
-                                                ],
-                                                "Selected": "MSCI211"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "Name": "1.0 units from the social sciences",
-                                        "Required": 2,
-                                        "Requirements": [
-                                            {
-                                                "Name": "1",
-                                                "Constraints": [
-                                                    "SOCIALSCIENCE"
-                                                ],
-                                                "Selected": "SCI205"
-                                            },
-                                            {
-                                                "Name": "2",
-                                                "Constraints": [
-                                                    "SOCIALSCIENCE"
-                                                ],
-                                                "Selected": "SCI206"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "Name": "0.5 units from the pure sciences",
-                                        "Required": 1,
-                                        "Requirements": [
-                                            {
-                                                "Name": "1",
-                                                "Constraints": [
-                                                    "PURESCIENCE"
-                                                ],
-                                                "Selected": "PHYS111"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "Name": "0.5 units from the pure and applied sciences",
-                                        "Required": 1,
-                                        "Requirements": [
-                                            {
-                                                "Name": "1",
-                                                "Constraints": [
-                                                    "APPLIEDSCIENCE"
-                                                ],
-                                                "Selected": "PHYS112"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                "Name": "One of (depth): ",
-                                "Required": 1,
-                                "Requirements": [
-                                    {
-                                        "Name": "1.5 units at the 3rd year level or higher with the same subject"
-                                    },
-                                    {
-                                        "Name": "1.5 units with the same subject forming a prerequisite chain of length three"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "Name": "An alternate plan approved by a CS Advisor",
-                        "Constraints": [
-                            "ALTERNATE"
-                        ],
-                        "Selected": null
-                    }
-                ]
-            },
-            {
-                "Name": "Seven (regular) or eight (co-op) terms enrolled in at least three courses totalling 1.5 units",
-                "Selected": "true"
-            },
-            {
-                "Selected": "true",
-                "Name": "No more than 3.0 units of excluded courses"
-            },
-            {
-                "Name": "CS Major Average of 60% or higher",
-                "Selected": "true"
-            },
-            {
-                "Name": "Cumulative Average of 60% or higher",
-                "Selected": "true"
-            },
-            {
-                "Selected": "true",
-                "Name": "English Writing Skills"
-            },
-            {
-                "Selected": "true",
-                "Name": "Coop requirements met, if applicatable, including a minium of five PD courses"
-            }
-        ]
-    }
+    "uw_id": 1011,
+    "Shortlist": [
+        {
+            "Course": "CS350",
+            "Title": "Operating Systems",
+            "Sections": [
+                {
+                    "Name": "LEC 001",
+                    "Capacity": "70/70"
+                },
+                {
+                    "Name": "LEC 002",
+                    "Capacity": "69/70"
+                },
+                {
+                    "Name": "TST 101",
+                    "Capacity": "139/140"
+                }
+            ],
+            "Capacity": "278/280"
+        }
+    ],
+    "Enrolled": [
+        {
+            "Course": "CS446",
+            "Title": "Software Design and Architectures",
+            "Capacity": "88/100",
+            "Sections": [
+                {
+                    "Name": "LEC 001",
+                    "Capacity": "39/50"
+                },
+                {
+                    "Name": "LEC 002",
+                    "Capacity": "49/50"
+                }
+            ]
+        },
+        {
+            "Course": "CS490",
+            "Title": "Information Systems Management",
+            "Capacity": "49/50",
+            "Sections": [
+                {
+                    "Name": "LEC 001",
+                    "Capacity": "49/50"
+                }
+            ]
+        },
+        {
+            "Course": "MUSIC140",
+            "Title": "Popular Music and Culture",
+            "Capacity": "193/200",
+            "Sections": [
+                {
+                    "Name": "LEC 001",
+                    "Capacity": "193/200"
+                }
+            ]
+        },
+        {
+            "Course": "ECON220",
+            "Title": "The Principles of Entrepreneurship",
+            "Capacity": "67/100",
+            "Sections": [
+                {
+                    "Name": "LEC 001",
+                    "Capacity": "67/100"
+                }
+            ]
+        },
+        {
+            "Course": "HRM200",
+            "Title": "Basic Human Resources Management",
+            "Capacity": "564/597",
+            "Sections": [
+                {
+                    "Name": "LEC 001",
+                    "Capacity": "340/357"
+                },
+                {
+                    "Name": "LEC 081",
+                    "Capacity": "224/240"
+                }
+            ]
+        }
+    ]
 }
